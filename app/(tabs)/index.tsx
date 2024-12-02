@@ -1,87 +1,3 @@
-// import { View, StyleSheet, ImageBackground } from "react-native";
-// import { coustomTheme } from "@/components/coustomTheme";
-// import { Text } from "react-native";
-// import { ScrollView } from "react-native";
-// import { Link, router } from "expo-router";
-// import { Pressable } from "react-native";
-// import levels from "@/components/indexLevels";
-// import capitalizeFirstLetter from "@/components/capitalizeFirstLetter";
-
-// export default function HomeScreen() {
-//   const themeStyles = coustomTheme();
-
-//   return (
-//     <View style={[styles.container, themeStyles.indexBackgroundColor]}>
-//       <ImageBackground
-//         source={require("@/assets/images/indexHeaderImage2.png")}
-//         resizeMode='cover'
-//         style={styles.backgroundImage}
-//       >
-//         <ScrollView>
-//           <View style={styles.levelContainer}>
-//             {levels.map((level, index) => (
-//               <Pressable
-//                 key={index}
-//                 /** @ts-ignore */
-//                 onPress={() => router.push(`/(levels)/${level}`)}
-//               >
-//                 <View
-//                   style={[
-//                     styles.level,
-//                     themeStyles.indexLevelBackgroundColor,
-//                     index % 2 === 0
-//                       ? styles.levelMoveToLeft
-//                       : styles.levelMoveToRight,
-//                   ]}
-//                 >
-//                   <Text
-//                     style={[styles.levelText, themeStyles.indexLevelTextColor]}
-//                   >
-//                     {capitalizeFirstLetter(level)}
-//                   </Text>
-//                 </View>
-//               </Pressable>
-//             ))}
-//           </View>
-//         </ScrollView>
-//       </ImageBackground>
-//     </View>
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//   },
-//   levelContainer: {
-//     flexDirection: "column",
-//     marginTop: 50,
-//     marginBottom: 40,
-//   },
-
-//   backgroundImage: {},
-//   level: {
-//     width: 120,
-//     height: 120,
-//     borderRadius: 99,
-//     justifyContent: "center",
-//     alignItems: "center",
-
-//     // Move from the outer wall
-//     marginHorizontal: 10,
-//   },
-//   levelText: {
-//     fontSize: 14,
-//     fontWeight: "bold",
-//   },
-//   levelMoveToRight: {
-//     alignSelf: "flex-end",
-//   },
-//   levelMoveToLeft: {
-//     alignSelf: "flex-start",
-//   },
-// });
-
 import { View, StyleSheet, ImageBackground } from "react-native";
 import { coustomTheme } from "@/components/coustomTheme";
 import { Text } from "react-native";
@@ -90,14 +6,17 @@ import { router } from "expo-router";
 import { Pressable } from "react-native";
 import levels from "@/components/indexLevels";
 import capitalizeFirstLetter from "@/components/capitalizeFirstLetter";
+import useInitialInfoStore from "@/components/userInformationStore";
 
 export default function HomeScreen() {
   const themeStyles = coustomTheme();
+  const { name, gender } = useInitialInfoStore();
+
   return (
     <View style={styles.container}>
       <ImageBackground
         source={require("@/assets/images/indexHeaderImage2.png")}
-        resizeMode='cover'
+        resizeMode="cover"
         style={styles.backgroundImage}
       >
         <ScrollView>
@@ -107,27 +26,22 @@ export default function HomeScreen() {
                 <Pressable
                   /** @ts-ignore */
                   onPress={() => router.push(`/(levels)/${level}`)}
+                  style={({ pressed }) => [
+                    styles.level,
+                    themeStyles.indexLevelBackgroundColor,
+                    pressed && styles.levelPressed, // Apply pressed styles
+                    index % 2 === 1
+                      ? styles.levelMoveToMiddle
+                      : index % 4 === 0
+                      ? styles.levelMoveToLeft
+                      : styles.levelMoveToRight,
+                  ]}
                 >
-                  <View
-                    style={[
-                      styles.level,
-                      themeStyles.indexLevelBackgroundColor,
-                      index % 2 === 1
-                        ? styles.levelMoveToMiddle
-                        : index % 4 === 0
-                        ? styles.levelMoveToLeft
-                        : styles.levelMoveToRight,
-                    ]}
+                  <Text
+                    style={[styles.levelText, themeStyles.indexLevelTextColor]}
                   >
-                    <Text
-                      style={[
-                        styles.levelText,
-                        themeStyles.indexLevelTextColor,
-                      ]}
-                    >
-                      {capitalizeFirstLetter(level)}
-                    </Text>
-                  </View>
+                    {capitalizeFirstLetter(level)}
+                  </Text>
                 </Pressable>
               </View>
             ))}
@@ -147,18 +61,24 @@ const styles = StyleSheet.create({
     marginTop: 50,
     marginBottom: 40,
   },
+  levelPressed: {
+    transform: [{ translateY: 4 }], // Move down when pressed
+    shadowOffset: { width: 0, height: 0 }, // Remove shadow when pressed
+    shadowOpacity: 0, // Remove shadow opacity when pressed
+    elevation: 0, // Remove Android shadow when pressed
+  },
   backgroundImage: {},
   level: {
-    width: 120,
-    height: 120,
+    width: 150,
+    height: 150,
+    marginHorizontal: 10,
     borderRadius: 99,
     justifyContent: "center",
     alignItems: "center",
-    marginHorizontal: 10,
 
     // iOS Shadow
     shadowColor: "rgb(13, 51, 0)",
-    shadowOffset: { width: 0, height: 3 },
+    shadowOffset: { width: 0, height: 8 },
     shadowOpacity: 1,
     shadowRadius: 2,
 
@@ -167,6 +87,7 @@ const styles = StyleSheet.create({
   },
   levelText: {
     fontSize: 14,
+    textAlign: "center",
     fontWeight: "bold",
   },
   levelMoveToRight: {

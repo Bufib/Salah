@@ -4,7 +4,6 @@ import { Image } from "expo-image";
 import Checkbox from "expo-checkbox";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { SafeAreaView } from "react-native-safe-area-context";
 import Animated, {
   Easing,
   useSharedValue,
@@ -22,12 +21,18 @@ export default function initialScreen() {
   const colorScheme = useColorScheme();
   const animatedValue = useSharedValue(500); // Starting off-screen to the right
 
-  // Trigger the animation when the gender changes
+  // Trigger the animation when the gender is selected
   useEffect(() => {
-    animatedValue.value = withTiming(gender ? 0 : 500, {
-      duration: 300,
-      easing: Easing.out(Easing.ease),
-    });
+    if (gender) {
+      // Reset the animation to the starting position
+      animatedValue.value = 500;
+
+      // Start the animation to bring the image into view
+      animatedValue.value = withTiming(0, {
+        duration: 300,
+        easing: Easing.out(Easing.ease),
+      });
+    }
   }, [gender]);
 
   const animatedStyle = useAnimatedStyle(() => {
@@ -44,14 +49,14 @@ export default function initialScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <ThemedView style={styles.contentContainer}>
         <View style={styles.askNameContainer}>
           <TextInput
             style={styles.askNameInput}
             onChangeText={onChangeName}
             value={name}
-            placeholder='Mein Name lautet'
+            placeholder="Mein Name lautet"
           />
         </View>
         <View style={styles.askGenderContainer}>
@@ -104,7 +109,7 @@ export default function initialScreen() {
                   ? require("@/assets/images/salamBoyLight.png")
                   : require("@/assets/images/salamBoyDark.png")
               }
-              contentFit='contain'
+              contentFit="contain"
             />
           </Animated.View>
         )}
@@ -117,12 +122,12 @@ export default function initialScreen() {
                   ? require("@/assets/images/salamGirlLight.png")
                   : require("@/assets/images/salamGirlDark.png")
               }
-              contentFit='contain'
+              contentFit="contain"
             />
           </Animated.View>
         )}
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 
