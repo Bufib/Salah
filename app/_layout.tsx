@@ -6,17 +6,13 @@ import {
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import { useEffect, useState, useLayoutEffect } from "react";
+import { useEffect, useState } from "react";
 import "react-native-reanimated";
 import { useColorScheme } from "@/hooks/useColorScheme";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
 import useInitialInfoStore, {
   useLoadInitialInformation,
 } from "@/components/userInformationStore";
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -24,26 +20,39 @@ export default function RootLayout() {
   const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
+  const [navigationHandled, setNavigationHandled] = useState(false);
 
-  // Automatically loads initial information when index opens
+  // Automatically loads initial information when the app opens
   useLoadInitialInformation();
 
   // Check if initial screen has already been shown
-  useLayoutEffect(() => {
-    const checkIfInitialalInformationInAsyncStorage = async () => {
+  useEffect(() => {
+    const navigateIfNecessary = async () => {
+      if (navigationHandled) return; // Prevent duplicate navigation attempts
+
       if (!name || !gender) {
-        router.replace("/initialScreen");
+        if (loaded) {
+          try {
+            setNavigationHandled(true); // Mark navigation as handled
+            await router.replace("/initialScreen");
+          } catch (error) {
+            console.error("Error navigating to /initialScreen:", error);
+          }
+        }
       }
     };
-    checkIfInitialalInformationInAsyncStorage();
-  }, []);
 
+    navigateIfNecessary();
+  }, [name, gender, loaded, navigationHandled]);
+
+  // Hide splash screen after fonts are loaded
   useEffect(() => {
     if (loaded) {
       SplashScreen.hideAsync();
     }
   }, [loaded]);
 
+  // Render nothing until fonts are loaded
   if (!loaded) {
     return null;
   }

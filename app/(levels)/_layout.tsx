@@ -13,6 +13,14 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <Stack>
+      <Stack.Screen
+          name='start'
+          options={{
+            headerShown: true,
+            title: "Start",
+            headerLeft: () => <HeaderLeftBackButton />,
+          }}
+        />
         <Stack.Screen
           name='wudu'
           options={{

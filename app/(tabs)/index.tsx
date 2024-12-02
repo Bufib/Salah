@@ -11,6 +11,7 @@ import useInitialInfoStore from "@/components/userInformationStore";
 export default function HomeScreen() {
   const themeStyles = coustomTheme();
   const { name, gender } = useInitialInfoStore();
+  const smallerLevels = ["iklas", "asr", "al-kauther", "qadr"];
 
   return (
     <View style={styles.container}>
@@ -28,6 +29,8 @@ export default function HomeScreen() {
                   onPress={() => router.push(`/(levels)/${level}`)}
                   style={({ pressed }) => [
                     styles.level,
+                    smallerLevels.includes(level.toLowerCase()) &&
+                      styles.smallerLevel, // Apply smaller style conditionally
                     themeStyles.indexLevelBackgroundColor,
                     pressed && styles.levelPressed, // Apply pressed styles
                     index % 2 === 1
@@ -69,8 +72,8 @@ const styles = StyleSheet.create({
   },
   backgroundImage: {},
   level: {
-    width: 150,
-    height: 150,
+    width: 160,
+    height: 160,
     marginHorizontal: 10,
     borderRadius: 99,
     justifyContent: "center",
@@ -84,6 +87,10 @@ const styles = StyleSheet.create({
 
     // Android Shadow (elevation)
     elevation: 5,
+  },
+  smallerLevel: {
+    width: 120, 
+    height: 120,
   },
   levelText: {
     fontSize: 14,

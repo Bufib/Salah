@@ -8,7 +8,7 @@ import { useColorScheme } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
 import { ScrollView } from "react-native";
 
-export default function fatiha() {
+export default function start() {
   const { name, gender } = useInitialInfoStore();
 
   return (
@@ -73,13 +73,6 @@ export default function fatiha() {
           Liebe, Barmherzigkeit und Führung.
         </ThemedText>
       </View>
-      <View style={styles.audioPlayerContainer}>
-       
-      <AudioPlayer
-        audioSource={require("@/assets/audio/suraFatihaMale.mp3")}
-        textData={fatihaText}
-      />
-      </View>
     </ScrollView>
   );
 }
@@ -87,7 +80,6 @@ export default function fatiha() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-   
   },
   readableContent: {
     flex: 1,
@@ -120,8 +112,5 @@ const styles = StyleSheet.create({
   image: {
     width: 300,
     height: 300,
-  },
-  audioPlayerContainer: {
-    marginBottom: 100
   },
 });
