@@ -31,6 +31,7 @@ export default function RootLayout() {
       if (navigationHandled) return; // Prevent duplicate navigation attempts
 
       if (!name || !gender) {
+        console.log(name)
         if (loaded) {
           try {
             setNavigationHandled(true); // Mark navigation as handled
@@ -39,6 +40,9 @@ export default function RootLayout() {
             console.error("Error navigating to /initialScreen:", error);
           }
         }
+      } else {
+        console.log("have")
+        await router.replace("/");
       }
     };
 
@@ -61,8 +65,8 @@ export default function RootLayout() {
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="(levels)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
+        <Stack.Screen name="initialScreen" />
       </Stack>
     </ThemeProvider>
   );

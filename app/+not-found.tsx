@@ -4,7 +4,16 @@ import { StyleSheet } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 
+import { usePathname } from 'expo-router';
+import { useEffect } from 'react';
+
 export default function NotFoundScreen() {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    console.log('Current Path:', pathname);
+  }, [pathname]);
+
   return (
     <>
       <Stack.Screen options={{ title: 'Oops!' }} />

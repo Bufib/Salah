@@ -5,7 +5,11 @@ import {
 } from "@react-navigation/native";
 import { Stack } from "expo-router";
 import { useColorScheme } from "@/hooks/useColorScheme";
-import HeaderLeftBackButton from "@/components/HeaderLeftBackButton";
+
+
+export const unstable_settings = {
+  initialRouteName: "/",
+};
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -13,28 +17,32 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <Stack>
-      <Stack.Screen
-          name='start'
+        <Stack.Screen
+          name="index"
+          options={{
+            headerShown: false,
+            title: "",
+          }}
+        />
+        <Stack.Screen
+          name="start"
           options={{
             headerShown: true,
             title: "Start",
-            headerLeft: () => <HeaderLeftBackButton />,
           }}
         />
         <Stack.Screen
-          name='wudu'
+          name="wudu"
           options={{
             headerShown: true,
             title: "Wudu",
-            headerLeft: () => <HeaderLeftBackButton />,
           }}
         />
         <Stack.Screen
-          name='fatiha'
+          name="fatiha"
           options={{
             headerShown: true,
             headerTitle: "Fatiha",
-            headerLeft: () => <HeaderLeftBackButton />,
           }}
         />
       </Stack>

@@ -2,16 +2,36 @@ import { StyleSheet, Text, View, Pressable } from "react-native";
 import React from "react";
 import { ThemedText } from "./ThemedText";
 import { coustomTheme } from "./coustomTheme";
+import { router, Href } from "expo-router";
 
-const ContinueButton = () => {
+type ContinueButtonProps = {
+  link: Href;
+  text?: string;
+};
+
+const ContinueButton = ({ link, text }: ContinueButtonProps) => {
   const themeStyles = coustomTheme();
   return (
-    <Pressable style={[styles.pressable, themeStyles.ContinueButtonColor]}>
-      <ThemedText style={[styles.pressableText,themeStyles.ContinueButtonTextColor ]}>Weiter</ThemedText>
+    <Pressable
+      style={[styles.pressable, themeStyles.ContinueButtonColor]}
+      onPress={() => router.navigate(link)}
+    >
+      {text ? (
+        <ThemedText
+          style={[styles.pressableText, themeStyles.ContinueButtonTextColor]}
+        >
+          {text}
+        </ThemedText>
+      ) : (
+        <ThemedText
+          style={[styles.pressableText, themeStyles.ContinueButtonTextColor]}
+        >
+          Weiter
+        </ThemedText>
+      )}
     </Pressable>
   );
 };
-
 export default ContinueButton;
 
 const styles = StyleSheet.create({

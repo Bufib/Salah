@@ -43,10 +43,19 @@ export default function initialScreen() {
 
   // Save in Asycstorage so screen only shown once
   const setInitialInformationInAsyncStorage = async () => {
-    await AsyncStorage.setItem("name", name);
-    await AsyncStorage.setItem("gender", gender);
-    router.replace("/");
+    try {
+      if (name !== "" && (gender === "boy" || gender === "girl")) {
+        await AsyncStorage.setItem("name", name);
+        await AsyncStorage.setItem("gender", gender);
+        router.replace("/(tabs)/levels/");
+      } else {
+        console.error("Name or gender is missing or invalid");
+      }
+    } catch (error) {
+      console.error("Error saving initial information:", error);
+    }
   };
+  
 
   return (
     <View style={styles.container}>

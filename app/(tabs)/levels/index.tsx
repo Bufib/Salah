@@ -26,7 +26,7 @@ export default function HomeScreen() {
               <View key={index}>
                 <Pressable
                   /** @ts-ignore */
-                  onPress={() => router.push(`/(levels)/${level}`)}
+                  onPress={() => router.push(`/(tabs)/levels/${level}`)}
                   style={({ pressed }) => [
                     styles.level,
                     smallerLevels.includes(level.toLowerCase()) &&

@@ -16,7 +16,7 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name='index'
+        name="levels"
         options={{
           title: "Home",
           tabBarIcon: ({ color, focused }) => (
@@ -28,7 +28,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name='settings'
+        name="settings"
         options={{
           title: "Einstellungen",
           tabBarIcon: ({ color, focused }) => (
@@ -39,7 +39,6 @@ export default function TabLayout() {
           ),
         }}
       />
-      
     </Tabs>
   );
 }
