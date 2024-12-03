@@ -1,85 +1,42 @@
 import { StyleSheet, Pressable, View } from "react-native";
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import AudioPlayer from "@/components/AudioPlayer";
-import { fatihaText } from "@/components/suren";
+import { fatihaTextGerman } from "@/components/suren";
 import { Image } from "expo-image";
 import useInitialInfoStore from "@/components/userInformationStore";
 import { useColorScheme } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
 import { ScrollView } from "react-native";
+import { ThemedView } from "@/components/ThemedView";
+import RenderSura from "@/components/RenderSura";
+import Spacer from "@/components/Spacer";
 
 export default function fatiha() {
   const { name, gender } = useInitialInfoStore();
 
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.readableContent}>
-        <View style={styles.imageTextContainer}>
-          <View style={styles.textContainer}>
-            <ThemedText style={[styles.informationText, styles.textLeft]}>
-              Im Islam ist das Gebet (Salah) eine der wichtigsten Formen der
-              Gottesverehrung und ein Weg, die Nähe zu Allah zu suchen. Es wird
-              als eine spirituelle Reise betrachtet, die die Seele reinigt und
-              den Menschen daran erinnert, wofür er geschaffen wurde. Das Gebet
-              symbolisiert die Verbindung zwischen dem Schöpfer und Seiner
-              Schöpfung und ist ein zentraler Bestandteil des täglichen Lebens.
-              Wir Schiiten verrichten unsere fünf täglichen Gebete (Morgengebet,
-              Mittagsgebet, Nachmittagsgebet, Abendgebet und Nachtgebet) in drei
-              Zeiträumen, indem wir das Mittags- und Nachmittagsgebet sowie das
-              Abend- und Nachtgebet, zusammenlegen. Diese Flexibilität zeigt die
-              Barmherzigkeit und Praktikabilität unseres Glaubens. Vor dem Gebet
-              führen wir eine rituelle Waschung (Wudu) durch, die Körper und
-              Geist auf die Begegnung mit Allah vorbereitet. Im Gebet selbst
-              gibt es folgende Stadien:
-            </ThemedText>
-          </View>
-          {gender && (
-            <View style={styles.imageContainer}>
-              <Image
-                style={styles.image}
-                source={
-                  gender === "boy"
-                    ? require("@/assets/images/boy.png")
-                    : require("@/assets/images/girl.png")
-                }
-                contentFit="contain"
-              />
-            </View>
-          )}
-        </View>
-        <ThemedText style={[styles.informationText, styles.boldText]}>
-          {"\n"}
-          1. Eröffnungspreisung [takbirat-ul-ihram]
-          {"\n"}
-          2. Stehen (qiama)
-          {"\n"}
-          3. Verneigung(ruku)
-          {"\n"}
-          4. Niederwerfung (sadschda)
-          {"\n"}
-          5. Bekenntisverlesung (taschahhud)
-          {"\n"}
-          6. Abschlussgruß (Salam)
-          {"\n"}
-          {"\n"}
-        </ThemedText>
+      <Spacer />
+      <ThemedView style={styles.informationContainer}>
         <ThemedText style={styles.informationText}>
-          Während des Gebets wird eine kleine Erdscheibe (Turba) bei der
-          Niederwerfung verwendet. Sie erinnert an die Demut des Menschen und
-          die Verbundenheit mit der Schöpfung. (Bei der Niederwerfung dann) Das
-          Gebet im Islam ist mehr als eine Pflicht. Es ist ein Geschenk, das den
-          Gläubigen erlaubt, inmitten des Alltags innezuhalten und sich auf das
-          Wesentliche zu besinnen – die Beziehung zu Allah, die Quelle aller
-          Liebe, Barmherzigkeit und Führung.
+          Die Fatiha ist die erste Sure im Quran. Darin danken wir Allah, dass
+          Er uns erschaffen hat und uns lieb hat. Wir bitten Ihn, uns zu helfen,
+          immer das Richtige zu tun und auf einem guten Weg zu bleiben
         </ThemedText>
-      </View>
-      <View style={styles.audioPlayerContainer}>
-       
-      <AudioPlayer
-        audioSource={require("@/assets/audio/suraFatihaMale.mp3")}
-        textData={fatihaText}
-      />
-      </View>
+        {gender && (
+          <Image
+            style={styles.image}
+            source={
+              gender === "boy"
+                ? require("@/assets/images/boy.png")
+                : require("@/assets/images/girl.png")
+            }
+            contentFit="cover"
+          />
+        )}
+      </ThemedView>
+      <Spacer />
+      <RenderSura text={fatihaTextGerman} />
     </ScrollView>
   );
 }
@@ -87,41 +44,34 @@ export default function fatiha() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-   
   },
-  readableContent: {
+  informationContainer: {
     flex: 1,
-    paddingHorizontal: 15,
-  },
-  imageTextContainer: {
     flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
-    marginTop: 15,
-  },
-  textContainer: {
-    flex: 3,
-    marginRight: 10,
-  },
-  textLeft: {
-    alignSelf: "flex-start",
+    marginHorizontal: 10,
+    padding: 10,
+    borderRadius: 10
   },
   informationText: {
-    fontSize: 14,
-  },
-  boldText: {
-    fontWeight: "700",
-  },
-
-  imageContainer: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    fontSize: 18,
+    lineHeight: 23,
+    marginRight: 10,
   },
   image: {
-    width: 300,
-    height: 300,
+    height: 250,
+    aspectRatio: 0.6,
+    alignSelf: "flex-end",
   },
-  audioPlayerContainer: {
-    marginBottom: 100
+  germanTextContainer: {
+    alignItems: "center",
+    padding: 15,
+    margin: 15,
+  },
+
+  germanText: {
+    fontSize: 18,
   },
 });
