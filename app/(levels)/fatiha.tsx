@@ -10,33 +10,30 @@ import { ScrollView } from "react-native";
 import { ThemedView } from "@/components/ThemedView";
 import RenderSura from "@/components/RenderSura";
 import Spacer from "@/components/Spacer";
+import InformationContainer from "@/components/InformationContainer";
+import TitleSura from "@/components/TitleSura";
+import ContinueButton from "@/components/ContinueButton";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function fatiha() {
   const { name, gender } = useInitialInfoStore();
 
   return (
     <ScrollView style={styles.container}>
-      <Spacer />
-      <ThemedView style={styles.informationContainer}>
-        <ThemedText style={styles.informationText}>
-          Die Fatiha ist die erste Sure im Quran. Darin danken wir Allah, dass
-          Er uns erschaffen hat und uns lieb hat. Wir bitten Ihn, uns zu helfen,
-          immer das Richtige zu tun und auf einem guten Weg zu bleiben
-        </ThemedText>
-        {gender && (
-          <Image
-            style={styles.image}
-            source={
-              gender === "boy"
-                ? require("@/assets/images/boy.png")
-                : require("@/assets/images/girl.png")
-            }
-            contentFit="cover"
-          />
-        )}
-      </ThemedView>
-      <Spacer />
-      <RenderSura text={fatihaTextGerman} />
+      <SafeAreaView edges={["bottom"]}>
+        <Spacer />
+        <InformationContainer
+          text={
+            "Die Fatiha ist die erste Sure im Quran. Darin danken wir Allah, dass Er uns erschaffen hat und uns lieb hat. Wir bitten Ihn, uns zu helfen, immer das Richtige zu tun und auf einem guten Weg zu bleiben"
+          }
+          gender={gender}
+        />
+        <Spacer />
+        <TitleSura text="Schauen wir uns als erstes die Sura auf Deutsch an:" />
+        <Spacer />
+        <RenderSura text={fatihaTextGerman} />
+        <ContinueButton />
+      </SafeAreaView>
     </ScrollView>
   );
 }
@@ -44,34 +41,5 @@ export default function fatiha() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  informationContainer: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginHorizontal: 10,
-    padding: 10,
-    borderRadius: 10
-  },
-  informationText: {
-    flex: 1,
-    fontSize: 18,
-    lineHeight: 23,
-    marginRight: 10,
-  },
-  image: {
-    height: 250,
-    aspectRatio: 0.6,
-    alignSelf: "flex-end",
-  },
-  germanTextContainer: {
-    alignItems: "center",
-    padding: 15,
-    margin: 15,
-  },
-
-  germanText: {
-    fontSize: 18,
   },
 });

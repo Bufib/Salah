@@ -18,6 +18,7 @@ export const Colors = {
     ContinueButtonColor: "#2475B0",
     // indexLevelBackgroundColor: "#2C3335",
     indexLevelTextColor: "#fff",
+    titleSuraBackroundColor: "#02B943"
   },
   dark: {
     text: "#ECEDEE",
@@ -32,5 +33,6 @@ export const Colors = {
     ContinueButtonColor: "#2475B0",
     // indexLevelBackgroundColor: "#DAE0E2",
     indexLevelTextColor: "#000",
+    titleSuraBackroundColor: "#019031"
   },
 };

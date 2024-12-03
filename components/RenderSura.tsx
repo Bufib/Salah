@@ -7,7 +7,7 @@ type RenderSuraProps = {
   text: string;
 };
 
-const RenderSura: React.FC<RenderSuraProps> = ({ text }) => {
+const RenderSura = ({ text }: RenderSuraProps) => {
   return (
     <ThemedView style={styles.textContainer}>
       <ThemedText style={styles.text}>{text}</ThemedText>
@@ -20,7 +20,7 @@ export default RenderSura;
 const styles = StyleSheet.create({
   textContainer: {
     flex: 1,
-    marginHorizontal: 15,
+    marginHorizontal: 10,
     paddingHorizontal: 15,
     borderWidth: 5,
     borderRadius: 15,

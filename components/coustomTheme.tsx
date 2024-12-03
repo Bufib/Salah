@@ -17,6 +17,9 @@ export const lightTheme = {
   ContinueButtonTextColor: {
     color: "#ffffff",
   },
+  titleSuraBackroundColor: {
+    backgroundColor: Colors.light.titleSuraBackroundColor,
+  }
 };
 
 export const darkTheme = {
@@ -35,6 +38,9 @@ export const darkTheme = {
   ContinueButtonTextColor: {
     color: "#ffffff",
   },
+  titleSuraBackroundColor: {
+    backgroundColor: Colors.dark.titleSuraBackroundColor,
+  }
 };
 
 export const coustomTheme = () => {
