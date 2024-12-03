@@ -5,8 +5,7 @@ import Spacer from "@/components/Spacer";
 import InformationContainer from "@/components/InformationContainer";
 import TitleSura from "@/components/TitleSura";
 import RenderSura from "@/components/RenderSura";
-import ContinueButton from "@/components/ContinueButton";
-import useInitialInfoStore from "@/components/userInformationStore";
+import useUserInformationStore from "@/components/userInformationStore";
 import { View } from "react-native";
 
 type SuraScreenProps = {
@@ -20,7 +19,7 @@ const SuraScreen = ({
   titleText,
   suraText,
 }: SuraScreenProps) => {
-  const { gender } = useInitialInfoStore();
+  const { name, gender } = useUserInformationStore();
 
   return (
     <View style={styles.container}>

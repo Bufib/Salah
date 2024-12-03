@@ -55,7 +55,6 @@ export default function initialScreen() {
       console.error("Error saving initial information:", error);
     }
   };
-  
 
   return (
     <View style={styles.container}>

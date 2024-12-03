@@ -10,43 +10,31 @@ import { useEffect, useState } from "react";
 import "react-native-reanimated";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { router } from "expo-router";
-import useInitialInfoStore, {
-  useLoadInitialInformation,
-} from "@/components/userInformationStore";
+import useUserInformationStore from "@/components/userInformationStore";
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
-  const { name, gender } = useInitialInfoStore();
   const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
   const [navigationHandled, setNavigationHandled] = useState(false);
+  const { name, gender } = useUserInformationStore();
 
-  // Automatically loads initial information when the app opens
-  useLoadInitialInformation();
-
-  // Check if initial screen has already been shown
+  // Check for user information (name, gender)
   useEffect(() => {
-    const navigateIfNecessary = async () => {
-      if (navigationHandled) return; // Prevent duplicate navigation attempts
+    if (navigationHandled || !loaded) return;
 
-      if (!name || !gender) {
-        console.log(name)
-        if (loaded) {
-          try {
-            setNavigationHandled(true); // Mark navigation as handled
-            await router.replace("/initialScreen");
-          } catch (error) {
-            console.error("Error navigating to /initialScreen:", error);
-          }
-        }
-      } else {
-        console.log("have")
-        await router.replace("/");
+    if (!name || !gender) {
+      try {
+        setNavigationHandled(true); // Mark navigation as handled
+        router.replace("/initialScreen");
+      } catch (error) {
+        console.error("Error navigating to /initialScreen:", error);
       }
-    };
-
-    navigateIfNecessary();
+    } else {
+      setNavigationHandled(true);
+      router.replace("/");
+    }
   }, [name, gender, loaded, navigationHandled]);
 
   // Hide splash screen after fonts are loaded
