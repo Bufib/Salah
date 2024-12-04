@@ -32,6 +32,13 @@ export default function RootLayout() {
             headerTitle: "Fatiha",
           }}
         />
+         <Stack.Screen
+          name="thirdScreen"
+          options={{
+            headerShown: true,
+            headerTitle: "Fatiha",
+          }}
+        />
       </Stack>
     </ThemeProvider>
   );

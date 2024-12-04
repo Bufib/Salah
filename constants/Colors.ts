@@ -38,5 +38,6 @@ export const Colors = {
     indexLastLevel: "rgba(255, 215, 0, 1)",
     indexShadowColorAccessible: "rgb(13, 51, 0)",
     indexShadowColorUnaccessible: "rgba(0, 0, 0, 0.3)",
+    startBorderColor: "rgba(0, 144, 0, 1)",
   }
 };

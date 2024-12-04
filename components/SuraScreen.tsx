@@ -19,7 +19,7 @@ const SuraScreen = ({
   titleText,
   suraText,
 }: SuraScreenProps) => {
-  const { name, gender } = useUserInformationStore();
+  const { gender } = useUserInformationStore();
 
   return (
     <View style={styles.container}>

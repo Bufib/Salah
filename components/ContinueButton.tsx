@@ -14,7 +14,7 @@ type ContinueButtonProps = {
 const ContinueButton = ({
   link,
   text,
-  activateNextLevelButton,
+  activateNextLevelButton = true,
 }: ContinueButtonProps) => {
   const themeStyles = coustomTheme();
 

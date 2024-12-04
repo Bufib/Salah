@@ -5,9 +5,9 @@ import { ScrollView } from "react-native";
 import { ThemedView } from "@/components/ThemedView";
 import ContinueButton from "@/components/ContinueButton";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Colors } from "@/constants/Colors";
 
 export default function start() {
-
   return (
     <ScrollView style={styles.container}>
       <SafeAreaView edges={["bottom"]}>
@@ -54,7 +54,7 @@ export default function start() {
             Quelle aller Liebe, Barmherzigkeit und Führung.
           </ThemedText>
         </ThemedView>
-        <ContinueButton  link={"/(tabs)/levels/"} text="Fertig" activateNextLevelButton={true}/>
+        <ContinueButton link={"/(tabs)/levels/"} text="Fertig" />
       </SafeAreaView>
     </ScrollView>
   );
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     padding: 15,
     borderWidth: 5,
     borderRadius: 15,
-    borderColor: "rgba(0, 144, 0, 1)",
+    borderColor: Colors.universal.startBorderColor
   },
   informationText: {
     fontSize: 16,

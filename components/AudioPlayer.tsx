@@ -248,8 +248,10 @@ const styles = StyleSheet.create({
   },
   suraText: {
     paddingHorizontal: 10,
+    paddingVertical: 8,
     textAlign: "center",
     fontSize: 18,
+    lineHeight: 25,
   },
   highlightedText: {
     color: "rgba(0, 144, 0,1.0)", // Highlight color

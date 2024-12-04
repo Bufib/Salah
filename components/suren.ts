@@ -7,14 +7,14 @@ export const fatihaTextAudio = [
   { time: 14, text: "6. Ihdina assirata almustaqeem" },
   {
     time: 16.5,
-    text: "7.Sirata allatheena anAAamta AAalayhim ghayri almaghdoobi AAalayhim wala addalleen",
+    text: "7. Sirata allatheena anAAamta AAalayhim ghayri almaghdoobi AAalayhim wala addalleen",
   },
 ];
 
 export const fatihaTextGerman = `
   1. Im Namen Allahs, des Allerbarmers, des 
      Barmherzigen.
-  
+
   2. (Alles) Lob gehört Allah, dem Herrn der 
      Welten,
           
@@ -22,13 +22,13 @@ export const fatihaTextGerman = `
          
   4. dem Herrscher am Tag des Gerichts.
 
-  5. Dir allein dienen wir, und zu Dir allein flehen 
-     wir um Hilfe.
+  5. Dir allein dienen wir, und zu Dir allein 
+     flehen wir um Hilfe.
          
   6. Leite uns den geraden Weg,
          
   7. den Weg derjenigen, denen Du Gunst 
-     erwiesen hast, nicht derjenigen, die (Deinen) 
-     Zorn erregt haben, und nicht der Irregehen-
-     den!
+     erwiesen hast, nicht derjenigen, die 
+     (Deinen) Zorn erregt haben, und nicht 
+     der Irregehenden!
   `;

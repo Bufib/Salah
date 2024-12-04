@@ -36,7 +36,6 @@ export default function Fatiha() {
         link={"/(tabs)/levels/fatiha/thirdScreen"}
         activateNextLevelButton={false}
       />
-      <Spacer />
     </ScrollView>
   );
 }
