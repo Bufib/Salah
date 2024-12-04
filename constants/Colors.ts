@@ -16,7 +16,6 @@ export const Colors = {
     tabIconSelected: tintColorLight,
     indexLevelBackgroundColor: "rgba(0, 144, 0, 1)",
     ContinueButtonColor: "#2475B0",
-    // indexLevelBackgroundColor: "#2C3335",
     indexLevelTextColor: "#fff",
     titleSuraBackroundColor: "#02B943"
   },
@@ -31,8 +30,13 @@ export const Colors = {
     tabIconSelected: tintColorDark,
     indexLevelBackgroundColor: "rgba(0, 144, 0, 1)",
     ContinueButtonColor: "#2475B0",
-    // indexLevelBackgroundColor: "#DAE0E2",
     indexLevelTextColor: "#000",
     titleSuraBackroundColor: "#019031"
   },
+  universal: {
+    indexUnaccessibleLevelBackground: "#d3d3d3",
+    indexLastLevel: "rgba(255, 215, 0, 1)",
+    indexShadowColorAccessible: "rgb(13, 51, 0)",
+    indexShadowColorUnaccessible: "rgba(0, 0, 0, 0.3)",
+  }
 };

@@ -1,17 +1,55 @@
-import { View, StyleSheet, ImageBackground } from "react-native";
+import {
+  View,
+  StyleSheet,
+  ImageBackground,
+  Text,
+  ScrollView,
+  Pressable,
+  Animated,
+} from "react-native";
+import React, { useLayoutEffect, useRef, useEffect } from "react";
 import { coustomTheme } from "@/components/coustomTheme";
-import { Text } from "react-native";
-import { ScrollView } from "react-native";
 import { router } from "expo-router";
-import { Pressable } from "react-native";
-import { levelButtons, smallerLevelButtons } from "@/components/levelButtonsIndex";
+import {
+  levelButtons,
+  smallerLevelButtons,
+} from "@/components/levelButtonsIndex";
 import capitalizeFirstLetter from "@/components/capitalizeFirstLetter";
-import useLevelStore from "@/components/levelStore";
+import { useLevelStore } from "@/components/levelStore";
+import { Colors } from "@/constants/Colors";
 
 export default function HomeScreen() {
   const themeStyles = coustomTheme();
-  const { levels, inaccessibleLevels, loadLevels, updateLevelAccess } =
-    useLevelStore();
+  const { levels, loadLevels } = useLevelStore();
+
+  // Load levels when the component mounts to check which are available to user
+  useLayoutEffect(() => {
+    loadLevels();
+  }, []);
+
+  // Find the last accessible level
+  const accessibleLevels = levelButtons.filter((level) => levels[level]);
+  const lastAccessibleLevel = accessibleLevels[accessibleLevels.length - 1];
+
+  // Create a pulsing animation for the glow
+  const glowAnim = useRef(new Animated.Value(1)).current;
+
+  useEffect(() => {
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(glowAnim, {
+          toValue: 1.2,
+          duration: 1000,
+          useNativeDriver: true,
+        }),
+        Animated.timing(glowAnim, {
+          toValue: 1,
+          duration: 1000,
+          useNativeDriver: true,
+        }),
+      ])
+    ).start();
+  }, [glowAnim]);
 
   return (
     <View style={styles.container}>
@@ -22,32 +60,63 @@ export default function HomeScreen() {
       >
         <ScrollView>
           <View style={styles.levelContainer}>
-            {levelButtons.map((level, index) => (
-              <View key={index}>
-                <Pressable
-                  /** @ts-ignore */
-                  onPress={() => router.push(`/(tabs)/levels/${level}`)}
-                  style={({ pressed }) => [
-                    styles.level,
-                    smallerLevelButtons.includes(level.toLowerCase()) &&
-                      styles.smallerLevel, // Apply smaller style conditionally
-                    themeStyles.indexLevelBackgroundColor,
-                    pressed && styles.levelPressed, // Apply pressed styles
-                    index % 2 === 1
-                      ? styles.levelMoveToMiddle
-                      : index % 4 === 0
-                      ? styles.levelMoveToLeft
-                      : styles.levelMoveToRight,
-                  ]}
-                >
-                  <Text
-                    style={[styles.levelText, themeStyles.indexLevelTextColor]}
+            {levelButtons.map((level, index) => {
+              const isAccessible = levels[level];
+              const isLastAccessible = lastAccessibleLevel === level;
+
+              return (
+                <View key={index} style={{ position: "relative" }}>
+                  <Pressable
+                    onPress={() => {
+                      if (isAccessible) {
+                        // @ts-ignore
+                        router.push(`/(tabs)/levels/${level}`);
+                      }
+                    }}
+                    style={({ pressed }) => [
+                      styles.level,
+                      smallerLevelButtons.includes(level.toLowerCase()) &&
+                        styles.smallerLevel,
+                      themeStyles.indexLevelBackgroundColor,
+                      pressed && isAccessible && styles.levelPressed,
+                      !isAccessible && styles.levelInaccessible, // Apply grey style if level is not accessible
+                      isLastAccessible && styles.lastAccessibleGlow, // Apply glowing effect to the last accessible level
+                      index % 2 === 1
+                        ? styles.levelMoveToMiddle
+                        : index % 4 === 0
+                        ? styles.levelMoveToLeft
+                        : styles.levelMoveToRight,
+                    ]}
                   >
-                    {capitalizeFirstLetter(level)}
-                  </Text>
-                </Pressable>
-              </View>
-            ))}
+                    {isLastAccessible ? (
+                      <Animated.View
+                        style={{
+                          transform: [{ scale: glowAnim }],
+                        }}
+                      >
+                        <Text
+                          style={[
+                            styles.levelText,
+                            themeStyles.indexLevelTextColor,
+                          ]}
+                        >
+                          {capitalizeFirstLetter(level)}
+                        </Text>
+                      </Animated.View>
+                    ) : (
+                      <Text
+                        style={[
+                          styles.levelText,
+                          themeStyles.indexLevelTextColor,
+                        ]}
+                      >
+                        {capitalizeFirstLetter(level)}
+                      </Text>
+                    )}
+                  </Pressable>
+                </View>
+              );
+            })}
           </View>
         </ScrollView>
       </ImageBackground>
@@ -63,6 +132,11 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     marginTop: 50,
     marginBottom: 40,
+  },
+  levelInaccessible: {
+    backgroundColor: Colors.universal.indexUnaccessibleLevelBackground,
+    shadowColor: Colors.universal.indexShadowColorUnaccessible,
+    elevation: 1,
   },
   levelPressed: {
     transform: [{ translateY: 4 }], // Move down when pressed
@@ -80,7 +154,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
 
     // iOS Shadow
-    shadowColor: "rgb(13, 51, 0)",
+    shadowColor: Colors.universal.indexShadowColorAccessible,
     shadowOffset: { width: 0, height: 8 },
     shadowOpacity: 1,
     shadowRadius: 2,
@@ -106,10 +180,11 @@ const styles = StyleSheet.create({
   levelMoveToLeft: {
     alignSelf: "flex-start",
   },
-  line: {
-    position: "absolute",
-    top: 60,
-    left: 0,
-    right: 0,
+  lastAccessibleGlow: {
+    shadowColor: Colors.universal.indexLastLevel,
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 1,
+    shadowRadius: 10,
+    elevation: 10,
   },
 });

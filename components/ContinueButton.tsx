@@ -3,18 +3,33 @@ import React from "react";
 import { ThemedText } from "./ThemedText";
 import { coustomTheme } from "./coustomTheme";
 import { router, Href } from "expo-router";
+import { activateNextLevel } from "@/components/levelStore";
 
 type ContinueButtonProps = {
   link: Href;
   text?: string;
+  activateNextLevelButton: boolean;
 };
 
-const ContinueButton = ({ link, text }: ContinueButtonProps) => {
+const ContinueButton = ({
+  link,
+  text,
+  activateNextLevelButton,
+}: ContinueButtonProps) => {
   const themeStyles = coustomTheme();
+
+  // Make next level Accessible if activateNextLevelButton === true
+  const handlePress = async () => {
+    if (activateNextLevelButton) {
+      await activateNextLevel(); // Activate the next level if true
+    }
+    router.push(link);
+  };
+
   return (
     <Pressable
       style={[styles.pressable, themeStyles.ContinueButtonColor]}
-      onPress={() => router.push(link)}
+      onPress={() => handlePress()}
     >
       {text ? (
         <ThemedText

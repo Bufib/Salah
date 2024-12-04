@@ -1,8 +1,5 @@
 import { StyleSheet, Pressable, View } from "react-native";
 import React, { useState, useEffect, useLayoutEffect } from "react";
-import { Image } from "expo-image";
-import useInitialInfoStore from "@/components/userInformationStore";
-import { useColorScheme } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
 import { ScrollView } from "react-native";
 import { ThemedView } from "@/components/ThemedView";
@@ -10,7 +7,6 @@ import ContinueButton from "@/components/ContinueButton";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function start() {
-  const { name, gender } = useInitialInfoStore();
 
   return (
     <ScrollView style={styles.container}>
@@ -58,7 +54,7 @@ export default function start() {
             Quelle aller Liebe, Barmherzigkeit und Führung.
           </ThemedText>
         </ThemedView>
-        <ContinueButton  link={"/(tabs)/levels/"} text="Fertig"/>
+        <ContinueButton  link={"/(tabs)/levels/"} text="Fertig" activateNextLevelButton={true}/>
       </SafeAreaView>
     </ScrollView>
   );
