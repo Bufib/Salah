@@ -4,14 +4,14 @@ import { Text } from "react-native";
 import { ScrollView } from "react-native";
 import { router } from "expo-router";
 import { Pressable } from "react-native";
-import levels from "@/components/indexLevels";
+import { levelButtons, smallerLevelButtons } from "@/components/levelButtonsIndex";
 import capitalizeFirstLetter from "@/components/capitalizeFirstLetter";
-import useInitialInfoStore from "@/components/userInformationStore";
+import useLevelStore from "@/components/levelStore";
 
 export default function HomeScreen() {
   const themeStyles = coustomTheme();
-  const { name, gender } = useInitialInfoStore();
-  const smallerLevels = ["iklas", "asr", "al-kauther", "qadr"];
+  const { levels, inaccessibleLevels, loadLevels, updateLevelAccess } =
+    useLevelStore();
 
   return (
     <View style={styles.container}>
@@ -22,14 +22,14 @@ export default function HomeScreen() {
       >
         <ScrollView>
           <View style={styles.levelContainer}>
-            {levels.map((level, index) => (
+            {levelButtons.map((level, index) => (
               <View key={index}>
                 <Pressable
                   /** @ts-ignore */
                   onPress={() => router.push(`/(tabs)/levels/${level}`)}
                   style={({ pressed }) => [
                     styles.level,
-                    smallerLevels.includes(level.toLowerCase()) &&
+                    smallerLevelButtons.includes(level.toLowerCase()) &&
                       styles.smallerLevel, // Apply smaller style conditionally
                     themeStyles.indexLevelBackgroundColor,
                     pressed && styles.levelPressed, // Apply pressed styles
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   smallerLevel: {
-    width: 120, 
+    width: 120,
     height: 120,
   },
   levelText: {

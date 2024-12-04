@@ -5,9 +5,10 @@ import {
 } from "@react-navigation/native";
 import { Stack } from "expo-router";
 import { useColorScheme } from "@/hooks/useColorScheme";
+import HeaderLeftBackButton from "@/components/HeaderLeftBackButton";
 
 export const unstable_settings = {
-  initialRouteName: "/",
+  initialRouteName: "index",
 };
 
 export default function RootLayout() {
@@ -19,13 +20,16 @@ export default function RootLayout() {
         <Stack.Screen
           name="index"
           options={{
-            headerShown: false,
+            headerShown: true,
+            headerTitle: "Fatiha",
+            headerLeft: () => <HeaderLeftBackButton />,
           }}
         />
         <Stack.Screen
           name="secondScreen"
           options={{
-            headerShown: false,
+            headerShown: true,
+            headerTitle: "Fatiha",
           }}
         />
       </Stack>

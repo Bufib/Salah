@@ -6,7 +6,6 @@ import {
 import { Stack } from "expo-router";
 import { useColorScheme } from "@/hooks/useColorScheme";
 
-
 export const unstable_settings = {
   initialRouteName: "/",
 };
@@ -41,7 +40,7 @@ export default function RootLayout() {
         <Stack.Screen
           name="fatiha"
           options={{
-            headerShown: true,
+            headerShown: false,
             headerTitle: "Fatiha",
           }}
         />

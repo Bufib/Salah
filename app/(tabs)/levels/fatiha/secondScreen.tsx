@@ -1,13 +1,32 @@
 import React from "react";
-import SuraScreen from "@/components/SuraScreen";
-import { fatihaTextGerman } from "@/components/suren";
+import { StyleSheet } from "react-native";
+import AudioPlayer from "@/components/AudioPlayer";
+import useUserInformationStore from "@/components/userInformationStore";
+import { fatihaTextAudio } from "@/components/suren";
+import { ScrollView } from "react-native";
+import TitleSura from "@/components/TitleSura";
+import Spacer from "@/components/Spacer";
 
 export default function Fatiha() {
+  const { gender } = useUserInformationStore();
   return (
-    <SuraScreen
-      informationText="Die Fatiha ist die erste Sure im Quran. Darin danken wir Allah, dass Er uns erschaffen hat und uns lieb hat. Wir bitten Ihn, uns zu helfen, immer das Richtige zu tun und auf einem guten Weg zu bleiben"
-      titleText="Schauen wir uns als erstes die Sura auf Deutsch an:"
-      suraText={fatihaTextGerman}
-    />
+    <ScrollView style={styles.container}>
+      <Spacer />
+      <TitleSura text="Lass uns nun die Sura anhören!"/>
+      <AudioPlayer
+        audioSource={
+          gender === "boy"
+            ? require("@/assets/audio/suraFatihaMale.mp3")
+            : require("@/assets/audio/suraFatihaFemale.mp3")
+        }
+        textData={fatihaTextAudio}
+      />
+    </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});

@@ -12,6 +12,7 @@ import { useColorScheme } from "@/hooks/useColorScheme";
 import { router } from "expo-router";
 import useUserInformationStore from "@/components/userInformationStore";
 
+
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({

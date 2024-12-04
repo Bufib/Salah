@@ -14,7 +14,7 @@ const ContinueButton = ({ link, text }: ContinueButtonProps) => {
   return (
     <Pressable
       style={[styles.pressable, themeStyles.ContinueButtonColor]}
-      onPress={() => router.navigate(link)}
+      onPress={() => router.push(link)}
     >
       {text ? (
         <ThemedText

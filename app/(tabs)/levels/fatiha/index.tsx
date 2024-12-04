@@ -16,7 +16,7 @@ export default function Fatiha() {
           titleText="Schauen wir uns als erstes die Sura auf Deutsch an:"
           suraText={fatihaTextGerman}
         />
-        <ContinueButton link={"././secondScreen"} />
+        <ContinueButton link={"/(tabs)/levels/fatiha/secondScreen"} />
       </SafeAreaView>
     </ScrollView>
   );
