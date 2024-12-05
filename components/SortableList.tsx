@@ -12,6 +12,9 @@ import { Colors } from "@/constants/Colors";
 import ContinueButton from "./ContinueButton";
 import { Href } from "expo-router";
 import Spacer from "./Spacer";
+import ConfettiCannon from "react-native-confetti-cannon";
+import InformationContainer from "./InformationContainer";
+import useUserInformationStore from "./userInformationStore";
 
 interface SortableListProps {
   data: string[];
@@ -43,6 +46,7 @@ const SortableList = ({
   const [items, setItems] = useState(shuffledTextArray(data));
   const [results, setResults] = useState<boolean[]>([]);
   const [rightResult, setRightResult] = useState<boolean>(false);
+  const { gender } = useUserInformationStore();
 
   const renderItem = ({ item, drag, isActive }: RenderItemParams<string>) => {
     return (
@@ -53,7 +57,11 @@ const SortableList = ({
             { backgroundColor: isActive ? "#f0f0f0" : "#ffffff" },
           ]}
         >
-          <ThemedText style={styles.itemText} onLongPress={drag}>
+          {/* Drag items as long as right result not achieved */}
+          <ThemedText
+            style={styles.itemText}
+            onLongPress={!rightResult ? drag : undefined}
+          >
             {item}
           </ThemedText>
         </ThemedView>
@@ -71,6 +79,14 @@ const SortableList = ({
 
   return (
     <View style={styles.container}>
+      {rightResult && (
+        <ConfettiCannon
+          count={100}
+          origin={{ x: -99, y: 0 }}
+          fadeOut={true}
+          explosionSpeed={300}
+        />
+      )}
       <DraggableFlatList
         data={items}
         renderItem={renderItem}
@@ -99,6 +115,17 @@ const SortableList = ({
         </Pressable>
       )}
 
+      <Spacer />
+      {rightResult && (
+        <InformationContainer
+          text="Sehr gut!"
+          imagePosition="left"
+          gender={gender}
+          bold={true}
+          center={true}
+          bigText={true}
+        />
+      )}
       <Spacer />
     </View>
   );

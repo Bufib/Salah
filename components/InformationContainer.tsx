@@ -7,18 +7,22 @@ import { ThemedView } from "./ThemedView";
 type InformationContainerProps = {
   gender?: "boy" | "girl";
   text: string;
-  imagePosition: "left" | "right";
+  imagePosition?: "left" | "right";
   bold?: boolean;
+  center?: boolean;
+  bigText?: boolean;
 };
 
 const InformationContainer = ({
   gender,
   text,
   bold,
+  center,
+  bigText,
   imagePosition = "left",
 }: InformationContainerProps) => (
   <ThemedView style={styles.container}>
-    {gender &&  imagePosition === "left" && (
+    {gender && imagePosition === "left" ? (
       <Image
         style={gender === "boy" ? styles.boy : styles.girl}
         source={
@@ -28,11 +32,18 @@ const InformationContainer = ({
         }
         contentFit="cover"
       />
-    )}
-    <ThemedText style={bold ? [styles.text, styles.boldText] : styles.text}>
+    ) : null}
+    <ThemedText
+      style={[
+        styles.text,
+        bold && styles.boldText,
+        center && styles.centerText,
+        bigText && styles.bigText
+      ]}
+    >
       {text}
     </ThemedText>
-    {gender &&  imagePosition === "right" && (
+    {gender && imagePosition === "right" ? (
       <Image
         style={gender === "boy" ? styles.boy : styles.girl}
         source={
@@ -42,13 +53,13 @@ const InformationContainer = ({
         }
         contentFit="cover"
       />
-    )}
+    ) : null}
   </ThemedView>
 );
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    //flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -56,6 +67,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     borderWidth: 2,
+    zIndex: -1,
   },
   text: {
     flex: 1,
@@ -66,6 +78,12 @@ const styles = StyleSheet.create({
   },
   boldText: {
     fontWeight: "700",
+  },
+  centerText: {
+    textAlign: "center",
+  },
+  bigText: {
+    fontSize: 24,
   },
 
   boy: {
