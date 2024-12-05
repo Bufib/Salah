@@ -24,7 +24,7 @@ const SuraScreen = ({
   return (
     <View style={styles.container}>
       <Spacer />
-      <InformationContainer text={informationText} gender={gender} />
+      <InformationContainer text={informationText} gender={gender} imagePosition="right"/>
       <Spacer />
       <TitleSura text={titleText} />
       <Spacer />

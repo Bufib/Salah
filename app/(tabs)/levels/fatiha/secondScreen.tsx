@@ -31,6 +31,7 @@ export default function Fatiha() {
         gender={gender}
         text="Höre dir die Sura solange an, bis du sie auswendig kannst! 
         Im nächsten Schritt gibt es dann nämlich einen kleinen Test"
+        imagePosition="right"
       />
       <ContinueButton
         link={"/(tabs)/levels/fatiha/thirdScreen"}

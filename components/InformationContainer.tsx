@@ -7,6 +7,7 @@ import { ThemedView } from "./ThemedView";
 type InformationContainerProps = {
   gender?: "boy" | "girl";
   text: string;
+  imagePosition: "left" | "right";
   bold?: boolean;
 };
 
@@ -14,12 +15,24 @@ const InformationContainer = ({
   gender,
   text,
   bold,
+  imagePosition = "left",
 }: InformationContainerProps) => (
   <ThemedView style={styles.container}>
+    {gender &&  imagePosition === "left" && (
+      <Image
+        style={gender === "boy" ? styles.boy : styles.girl}
+        source={
+          gender === "boy"
+            ? require("@/assets/images/boy.png")
+            : require("@/assets/images/girl.png")
+        }
+        contentFit="cover"
+      />
+    )}
     <ThemedText style={bold ? [styles.text, styles.boldText] : styles.text}>
       {text}
     </ThemedText>
-    {gender && (
+    {gender &&  imagePosition === "right" && (
       <Image
         style={gender === "boy" ? styles.boy : styles.girl}
         source={
@@ -42,7 +55,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     padding: 10,
     borderRadius: 10,
-    borderWidth: 2
+    borderWidth: 2,
   },
   text: {
     flex: 1,
@@ -52,7 +65,7 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
   },
   boldText: {
-    fontWeight: "700"
+    fontWeight: "700",
   },
 
   boy: {
