@@ -15,7 +15,6 @@ export const Colors = {
     tabIconDefault: "#687076",
     tabIconSelected: tintColorLight,
     indexLevelBackgroundColor: "rgba(0, 144, 0, 1)",
-    ContinueButtonColor: "#2475B0",
     indexLevelTextColor: "#fff",
     titleSuraBackroundColor: "#02B943"
   },
@@ -29,7 +28,6 @@ export const Colors = {
     tabIconDefault: "#9BA1A6",
     tabIconSelected: tintColorDark,
     indexLevelBackgroundColor: "rgba(0, 144, 0, 1)",
-    ContinueButtonColor: "#2475B0",
     indexLevelTextColor: "#000",
     titleSuraBackroundColor: "#019031"
   },
@@ -39,5 +37,9 @@ export const Colors = {
     indexShadowColorAccessible: "rgb(13, 51, 0)",
     indexShadowColorUnaccessible: "rgba(0, 0, 0, 0.3)",
     startBorderColor: "rgba(0, 144, 0, 1)",
+    continueButtonColor: "#2475B0",
+    continueButtonTextColor: "#fff",
+    checkResultSortableListButtonColor: "#2475B0",
+    checkResultSortableListButtonTextColor: "#fff",
   }
 };

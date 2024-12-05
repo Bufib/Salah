@@ -1,7 +1,7 @@
-import { StyleSheet, Text, View, Pressable } from "react-native";
+import { StyleSheet, Pressable } from "react-native";
 import React from "react";
 import { ThemedText } from "./ThemedText";
-import { coustomTheme } from "./coustomTheme";
+import { Colors } from "@/constants/Colors";
 import { router, Href } from "expo-router";
 import { activateNextLevel } from "@/components/levelStore";
 
@@ -16,8 +16,6 @@ const ContinueButton = ({
   text,
   activateNextLevelButton = true,
 }: ContinueButtonProps) => {
-  const themeStyles = coustomTheme();
-
   // Make next level Accessible if activateNextLevelButton === true
   const handlePress = async () => {
     if (activateNextLevelButton) {
@@ -27,22 +25,11 @@ const ContinueButton = ({
   };
 
   return (
-    <Pressable
-      style={[styles.pressable, themeStyles.ContinueButtonColor]}
-      onPress={() => handlePress()}
-    >
+    <Pressable style={styles.pressable} onPress={() => handlePress()}>
       {text ? (
-        <ThemedText
-          style={[styles.pressableText, themeStyles.ContinueButtonTextColor]}
-        >
-          {text}
-        </ThemedText>
+        <ThemedText style={styles.pressableText}>{text}</ThemedText>
       ) : (
-        <ThemedText
-          style={[styles.pressableText, themeStyles.ContinueButtonTextColor]}
-        >
-          Weiter
-        </ThemedText>
+        <ThemedText style={styles.pressableText}>Weiter</ThemedText>
       )}
     </Pressable>
   );
@@ -60,10 +47,12 @@ const styles = StyleSheet.create({
     marginRight: 15,
     marginTop: 5,
     marginBottom: 5,
+    backgroundColor: Colors.universal.continueButtonColor,
   },
   pressableText: {
     fontSize: 20,
     fontWeight: "600",
     textAlign: "center",
+    color: Colors.universal.continueButtonTextColor,
   },
 });

@@ -11,15 +11,10 @@ export const lightTheme = {
   indexLevelTextColor: {
     color: Colors.light.indexLevelTextColor,
   },
-  ContinueButtonColor: {
-    backgroundColor: Colors.light.ContinueButtonColor,
-  },
-  ContinueButtonTextColor: {
-    color: "#ffffff",
-  },
-  titleSuraBackroundColor: {
+
+  titleSuraBackroundColor: {
     backgroundColor: Colors.light.titleSuraBackroundColor,
-  }
+  },
 };
 
 export const darkTheme = {
@@ -32,15 +27,10 @@ export const darkTheme = {
   indexLevelTextColor: {
     color: Colors.dark.indexLevelTextColor,
   },
-  ContinueButtonColor: {
-    backgroundColor: Colors.dark.ContinueButtonColor,
-  },
-  ContinueButtonTextColor: {
-    color: "#ffffff",
-  },
-  titleSuraBackroundColor: {
+
+  titleSuraBackroundColor: {
     backgroundColor: Colors.dark.titleSuraBackroundColor,
-  }
+  },
 };
 
 export const coustomTheme = () => {

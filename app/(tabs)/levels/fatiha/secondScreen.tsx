@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 import AudioPlayer from "@/components/AudioPlayer";
 import useUserInformationStore from "@/components/userInformationStore";
 import { fatihaTextAudio } from "@/components/suren";
-import { ScrollView } from "react-native";
+import { ScrollView, View } from "react-native";
 import TitleSura from "@/components/TitleSura";
 import Spacer from "@/components/Spacer";
 import InformationContainer from "@/components/InformationContainer";

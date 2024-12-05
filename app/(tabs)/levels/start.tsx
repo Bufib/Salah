@@ -54,7 +54,7 @@ export default function start() {
             Quelle aller Liebe, Barmherzigkeit und Führung.
           </ThemedText>
         </ThemedView>
-        <ContinueButton link={"/(tabs)/levels/"} text="Fertig" />
+        <ContinueButton link={"/(tabs)/levels/"} text="Fertig" activateNextLevelButton={false} />
       </SafeAreaView>
     </ScrollView>
   );

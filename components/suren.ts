@@ -11,6 +11,17 @@ export const fatihaTextAudio = [
   },
 ];
 
+export const fatihaTextDragAndDrop = [
+  "Bismi Allahi arrahmani arraheem",
+  "Alhamdu lillahi rabbi alAAalameen",
+  "Arrahmani arraheem",
+  "Maliki yawmi addeen",
+  "Iyyaka naAAbudu waiyyaka nastaAAeen",
+  "Ihdina assirata almustaqeem",
+  "Sirata allatheena anAAamta AAalayhim ghayri almaghdoobi AAalayhim wala addalleen",
+];
+
+
 export const fatihaTextGerman = `
   1. Im Namen Allahs, des Allerbarmers, des 
      Barmherzigen.
