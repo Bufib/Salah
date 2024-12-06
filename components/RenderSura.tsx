@@ -1,17 +1,19 @@
 import { StyleSheet } from "react-native";
 import React from "react";
 import { ThemedText } from "./ThemedText";
-import { ThemedView } from "./ThemedView";
+import { View } from "react-native";
+import { coustomTheme } from "./coustomTheme";
 
 type RenderSuraProps = {
   text: string;
 };
 
 const RenderSura = ({ text }: RenderSuraProps) => {
+  const themestyles = coustomTheme()
   return (
-    <ThemedView style={styles.textContainer}>
+    <View style={[styles.textContainer, themestyles.contrast]}>
       <ThemedText style={styles.text}>{text}</ThemedText>
-    </ThemedView>
+    </View>
   );
 };
 

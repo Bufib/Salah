@@ -5,6 +5,15 @@ export const lightTheme = {
   text: {
     color: Colors.light.text,
   },
+  background: {
+    backgroundColor: Colors.light.background,
+  },
+  contrast: {
+    backgroundColor: Colors.light.contrast,
+  },
+  initialScreenTextColor: {
+    color: Colors.light.initialScreenTextColor,
+  },
   indexLevelBackgroundColor: {
     backgroundColor: Colors.light.indexLevelBackgroundColor,
   },
@@ -20,6 +29,15 @@ export const lightTheme = {
 export const darkTheme = {
   text: {
     color: Colors.dark.text,
+  },
+  contrast: {
+    backgroundColor: Colors.dark.contrast,
+  },
+  background: {
+    backgroundColor: Colors.dark.background,  // For ScrollView and similar to have the backgorund applied
+  },
+  initialScreenTextColor: {
+    color: Colors.dark.initialScreenTextColor,
   },
   indexLevelBackgroundColor: {
     backgroundColor: Colors.dark.indexLevelBackgroundColor,

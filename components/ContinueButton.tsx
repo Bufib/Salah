@@ -4,6 +4,7 @@ import { ThemedText } from "./ThemedText";
 import { Colors } from "@/constants/Colors";
 import { router, Href } from "expo-router";
 import { activateNextLevel } from "@/components/levelStore";
+import { View } from "react-native";
 
 type ContinueButtonProps = {
   link: Href;

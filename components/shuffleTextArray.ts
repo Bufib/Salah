@@ -6,3 +6,4 @@ const shuffledTextArray = (data: string[]) => {
 };
 
 export default shuffledTextArray
+

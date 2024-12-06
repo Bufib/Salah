@@ -1,12 +1,11 @@
 import React from "react";
-import { ScrollView, StyleSheet } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { ThemedView } from "./ThemedView";
 import Spacer from "@/components/Spacer";
 import InformationContainer from "@/components/InformationContainer";
 import TitleSura from "@/components/TitleSura";
 import RenderSura from "@/components/RenderSura";
-import useUserInformationStore from "@/components/userInformationStore";
-import { View } from "react-native";
+import { StyleSheet } from "react-native";
+import useGetUserInformation from "@/components/useGetUserInformation";
 
 type SuraScreenProps = {
   informationText: string;
@@ -19,17 +18,19 @@ const SuraScreen = ({
   titleText,
   suraText,
 }: SuraScreenProps) => {
-  const { gender } = useUserInformationStore();
+  const { name, gender, userLoading } = useGetUserInformation();
+
+  console.log(gender)
 
   return (
-    <View style={styles.container}>
+    <ThemedView style={styles.container}>
       <Spacer />
       <InformationContainer text={informationText} gender={gender} imagePosition="right"/>
       <Spacer />
       <TitleSura text={titleText} />
       <Spacer />
       <RenderSura text={suraText} />
-    </View>
+    </ThemedView>
   );
 };
 

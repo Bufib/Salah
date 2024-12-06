@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Image } from "expo-image";
 import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "./ThemedView";
+import { coustomTheme } from "./coustomTheme";
 
 type InformationContainerProps = {
   gender?: "boy" | "girl";
@@ -20,42 +20,45 @@ const InformationContainer = ({
   center,
   bigText,
   imagePosition = "left",
-}: InformationContainerProps) => (
-  <ThemedView style={styles.container}>
-    {gender && imagePosition === "left" ? (
-      <Image
-        style={gender === "boy" ? styles.boy : styles.girl}
-        source={
-          gender === "boy"
-            ? require("@/assets/images/boy.png")
-            : require("@/assets/images/girl.png")
-        }
-        contentFit="cover"
-      />
-    ) : null}
-    <ThemedText
-      style={[
-        styles.text,
-        bold && styles.boldText,
-        center && styles.centerText,
-        bigText && styles.bigText
-      ]}
-    >
-      {text}
-    </ThemedText>
-    {gender && imagePosition === "right" ? (
-      <Image
-        style={gender === "boy" ? styles.boy : styles.girl}
-        source={
-          gender === "boy"
-            ? require("@/assets/images/boy.png")
-            : require("@/assets/images/girl.png")
-        }
-        contentFit="cover"
-      />
-    ) : null}
-  </ThemedView>
-);
+}: InformationContainerProps) => {
+  const themeStyles = coustomTheme();
+  return (
+    <View style={[styles.container, themeStyles.contrast]}>
+      {gender && imagePosition === "left" ? (
+        <Image
+          style={gender === "boy" ? styles.boy : styles.girl}
+          source={
+            gender === "boy"
+              ? require("@/assets/images/boy.png")
+              : require("@/assets/images/girl.png")
+          }
+          contentFit="cover"
+        />
+      ) : null}
+      <ThemedText
+        style={[
+          styles.text,
+          bold && styles.boldText,
+          center && styles.centerText,
+          bigText && styles.bigText,
+        ]}
+      >
+        {text}
+      </ThemedText>
+      {gender && imagePosition === "right" ? (
+        <Image
+          style={gender === "boy" ? styles.boy : styles.girl}
+          source={
+            gender === "boy"
+              ? require("@/assets/images/boy.png")
+              : require("@/assets/images/girl.png")
+          }
+          contentFit="cover"
+        />
+      ) : null}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -67,7 +70,6 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     borderWidth: 2,
-    zIndex: -1,
   },
   text: {
     flex: 1,

@@ -17,6 +17,7 @@ import {
 import capitalizeFirstLetter from "@/components/capitalizeFirstLetter";
 import { useLevelStore } from "@/components/levelStore";
 import { Colors } from "@/constants/Colors";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function HomeScreen() {
   const themeStyles = coustomTheme();

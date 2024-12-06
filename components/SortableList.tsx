@@ -1,20 +1,18 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Pressable } from "react-native";
+import { View, StyleSheet, Pressable, Text } from "react-native";
 import DraggableFlatList, {
   RenderItemParams,
 } from "react-native-draggable-flatlist";
 import { ThemedText } from "./ThemedText";
 import { ThemedView } from "./ThemedView";
 import shuffledTextArray from "./shuffleTextArray";
-import Entypo from "@expo/vector-icons/Entypo";
-import Octicons from "@expo/vector-icons/Octicons";
 import { Colors } from "@/constants/Colors";
 import ContinueButton from "./ContinueButton";
 import { Href } from "expo-router";
 import Spacer from "./Spacer";
 import ConfettiCannon from "react-native-confetti-cannon";
-import InformationContainer from "./InformationContainer";
-import useUserInformationStore from "./userInformationStore";
+import useGetUserInformation from "@/components/useGetUserInformation";
+import ImageWithSpeechBubble from "./ImageWithSpeechBubble";
 
 interface SortableListProps {
   data: string[];
@@ -33,46 +31,43 @@ const SortableList = ({
     const results = items.map(
       (item, index) => item.trim() === data[index].trim()
     );
-    setResults(results);
 
-    if (results.includes(false)) {
-      setTimeout(() => setResults([]), 2000); // Hide icons after 2 seconds if there's an incorrect item
-    } else {
-      setRightResult(true);
-    }
+    setResults(results);
+    setRightResult(!results.includes(false));
+    setSubmit(true);
   };
 
   // Shuffle Data randomly every time this component is used via shuffledTextArray
   const [items, setItems] = useState(shuffledTextArray(data));
   const [results, setResults] = useState<boolean[]>([]);
   const [rightResult, setRightResult] = useState<boolean>(false);
-  const { gender } = useUserInformationStore();
+  const [submit, setSubmit] = useState<boolean>(false);
+
+  const { name, gender, userLoading } = useGetUserInformation();
 
   const renderItem = ({ item, drag, isActive }: RenderItemParams<string>) => {
     return (
       <View style={styles.listItemsContainer}>
-        <ThemedView
+        <Pressable
           style={[
             styles.listItem,
-            { backgroundColor: isActive ? "#f0f0f0" : "#ffffff" },
+            {
+              backgroundColor: submit
+                ? results[items.indexOf(item)]
+                  ? Colors.universal.sortableListRightOrder
+                  : Colors.universal.sortableListWrongOrder
+                : isActive
+                ? Colors.universal.sortableListIsActiv
+                : Colors.universal.sortableListIsNotActiv,
+            },
           ]}
+          onLongPress={!rightResult ? drag : undefined}
         >
           {/* Drag items as long as right result not achieved */}
-          <ThemedText
-            style={styles.itemText}
-            onLongPress={!rightResult ? drag : undefined}
-          >
+          <Text style={styles.itemText} selectable={false}>
             {item}
-          </ThemedText>
-        </ThemedView>
-        <View style={styles.listItemsIcons}>
-          {results.length > 0 &&
-            (results[items.indexOf(item)] ? (
-              <Entypo name="check" size={31} color="green" />
-            ) : (
-              <Octicons name="x" size={35} color="red" />
-            ))}
-        </View>
+          </Text>
+        </Pressable>
       </View>
     );
   };
@@ -90,7 +85,7 @@ const SortableList = ({
       <DraggableFlatList
         data={items}
         renderItem={renderItem}
-        keyExtractor={(item, index) => `draggable-item-${index}`}
+        keyExtractor={(item, index) => `item-${index}`}
         onDragEnd={({ data }) => setItems(data)}
         containerStyle={{ flex: 1 }}
       />
@@ -114,18 +109,16 @@ const SortableList = ({
           </ThemedText>
         </Pressable>
       )}
-
-      <Spacer />
       {rightResult && (
-        <InformationContainer
-          text="Sehr gut!"
-          imagePosition="left"
-          gender={gender}
+        <ImageWithSpeechBubble
+          text="Mashallah!"
+          top={"10%"}
+          right={"-10%"}
           bold={true}
-          center={true}
-          bigText={true}
+          fontSize={18}
         />
       )}
+      <Spacer />
       <Spacer />
     </View>
   );

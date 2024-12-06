@@ -1,5 +1,14 @@
 import React, { Component, useState, useEffect } from "react";
-import { Text, StyleSheet, View, TextInput, Pressable } from "react-native";
+import {
+  Text,
+  StyleSheet,
+  View,
+  TextInput,
+  Pressable,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 import { Image } from "expo-image";
 import Checkbox from "expo-checkbox";
 import { ThemedText } from "@/components/ThemedText";
@@ -14,12 +23,15 @@ import { useColorScheme } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
 import genderOptions from "@/components/genderOptions";
+import { TouchableWithoutFeedback } from "react-native";
+import { coustomTheme } from "@/components/coustomTheme";
 
 export default function initialScreen() {
   const [name, onChangeName] = useState("");
   const [gender, setGender] = useState("");
   const colorScheme = useColorScheme();
   const animatedValue = useSharedValue(500); // Starting off-screen to the right
+  const themeStyles = coustomTheme();
 
   // Trigger the animation when the gender is selected
   useEffect(() => {
@@ -47,7 +59,7 @@ export default function initialScreen() {
       if (name !== "" && (gender === "boy" || gender === "girl")) {
         await AsyncStorage.setItem("name", name);
         await AsyncStorage.setItem("gender", gender);
-        router.replace("/(tabs)/levels/");
+        router.replace("/(tabs)/levels");
       } else {
         console.error("Name or gender is missing or invalid");
       }
@@ -57,85 +69,94 @@ export default function initialScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <ThemedView style={styles.contentContainer}>
-        <View style={styles.askNameContainer}>
-          <TextInput
-            style={styles.askNameInput}
-            onChangeText={onChangeName}
-            value={name}
-            placeholder="Mein Name lautet"
-          />
-        </View>
-        <View style={styles.askGenderContainer}>
-          <ThemedText style={styles.askGenderText}>Ich bin ein:</ThemedText>
-          <View style={styles.selectGenderOuterContainer}>
-            {genderOptions.map((option) => (
-              <View
-                key={option.value}
-                style={styles.selectGenderInnerContainer}
-              >
-                <Checkbox
-                  style={styles.selectGender}
-                  value={gender === option.value}
-                  onValueChange={() => setGender(option.value)}
-                  color={
-                    gender === option.value ? "rgba(0, 144, 0, 1)" : undefined
-                  }
-                />
-                <ThemedText style={styles.genderLable}>
-                  {option.lable}
-                </ThemedText>
-              </View>
-            ))}
-          </View>
-        </View>
-      </ThemedView>
-      <Pressable
-        style={[
-          styles.startButton,
-          (!gender || name === "") && styles.buttonDisabled,
-        ]}
-        onPress={() => setInitialInformationInAsyncStorage()}
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
+        style={{ flex: 1 }}
       >
-        <ThemedText
-          style={[
-            styles.startButtonText,
-            (!gender || name === "") && styles.buttonTextDisabled,
-          ]}
-        >
-          Los gehts!
-        </ThemedText>
-      </Pressable>
-      <View style={styles.imageContainer}>
-        {gender === "boy" && (
-          <Animated.View style={animatedStyle}>
-            <Image
-              style={styles.imageBoy}
-              source={
-                colorScheme === "light"
-                  ? require("@/assets/images/salamBoyLight.png")
-                  : require("@/assets/images/salamBoyDark.png")
-              }
-              contentFit="contain"
-            />
-          </Animated.View>
-        )}
-        {gender === "girl" && (
-          <Animated.View style={animatedStyle}>
-            <Image
-              style={styles.imageGirl}
-              source={
-                colorScheme === "light"
-                  ? require("@/assets/images/salamGirlLight.png")
-                  : require("@/assets/images/salamGirlDark.png")
-              }
-              contentFit="contain"
-            />
-          </Animated.View>
-        )}
-      </View>
-    </View>
+        <ThemedView style={styles.container}>
+          <View style={[styles.contentContainer, themeStyles.contrast]}>
+            <View style={styles.askNameContainer}>
+              <TextInput
+                style={[styles.askNameInput, themeStyles.initialScreenTextColor]}
+                onChangeText={onChangeName}
+                value={name}
+                placeholder="Mein Name lautet"
+              />
+            </View>
+            <View style={styles.askGenderContainer}>
+              <ThemedText style={styles.askGenderText}>Ich bin ein:</ThemedText>
+              <View style={styles.selectGenderOuterContainer}>
+                {genderOptions.map((option) => (
+                  <View
+                    key={option.value}
+                    style={styles.selectGenderInnerContainer}
+                  >
+                    <Checkbox
+                      style={styles.selectGender}
+                      value={gender === option.value}
+                      onValueChange={() => setGender(option.value)}
+                      color={
+                        gender === option.value
+                          ? "rgba(0, 144, 0, 1)"
+                          : undefined
+                      }
+                    />
+                    <ThemedText style={styles.genderLable}>
+                      {option.lable}
+                    </ThemedText>
+                  </View>
+                ))}
+              </View>
+            </View>
+          </View>
+          <Pressable
+            style={[
+              styles.startButton,
+              (!gender || name === "") && styles.buttonDisabled,
+            ]}
+            onPress={() => setInitialInformationInAsyncStorage()}
+          >
+            <ThemedText
+              style={[
+                styles.startButtonText,
+                (!gender || name === "") && styles.buttonTextDisabled,
+              ]}
+            >
+              Los gehts!
+            </ThemedText>
+          </Pressable>
+          <View style={styles.imageContainer}>
+            {gender === "boy" && (
+              <Animated.View style={animatedStyle}>
+                <Image
+                  style={styles.imageBoy}
+                  source={
+                    colorScheme === "light"
+                      ? require("@/assets/images/salamBoyLight.png")
+                      : require("@/assets/images/salamBoyDark.png")
+                  }
+                  contentFit="contain"
+                />
+              </Animated.View>
+            )}
+            {gender === "girl" && (
+              <Animated.View style={animatedStyle}>
+                <Image
+                  style={styles.imageGirl}
+                  source={
+                    colorScheme === "light"
+                      ? require("@/assets/images/salamGirlLight.png")
+                      : require("@/assets/images/salamGirlDark.png")
+                  }
+                  contentFit="contain"
+                />
+              </Animated.View>
+            )}
+          </View>
+        </ThemedView>
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 }
 
@@ -159,7 +180,6 @@ const styles = StyleSheet.create({
   askNameInput: {
     paddingHorizontal: 10,
     fontSize: 18,
-    color: "rgba(0, 144, 0, 1)",
     fontWeight: "bold",
   },
   askGenderContainer: {

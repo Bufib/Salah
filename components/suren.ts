@@ -23,23 +23,17 @@ export const fatihaTextDragAndDrop = [
 
 
 export const fatihaTextGerman = `
-  1. Im Namen Allahs, des Allerbarmers, des 
-     Barmherzigen.
+1. Im Namen Allahs, des Allerbarmers, des Barmherzigen.
 
-  2. (Alles) Lob gehört Allah, dem Herrn der 
-     Welten,
+2. (Alles) Lob gehört Allah, dem Herrn der Welten
           
-  3. dem Allerbarmer, dem Barmherzigen,
+3. dem Allerbarmer, dem Barmherzigen
          
-  4. dem Herrscher am Tag des Gerichts.
+4. dem Herrscher am Tag des Gerichts.
 
-  5. Dir allein dienen wir, und zu Dir allein 
-     flehen wir um Hilfe.
+5. Dir allein dienen wir, und zu Dir allein flehen wir um Hilfe.
          
-  6. Leite uns den geraden Weg,
+6. Leite uns den geraden Weg
          
-  7. den Weg derjenigen, denen Du Gunst 
-     erwiesen hast, nicht derjenigen, die 
-     (Deinen) Zorn erregt haben, und nicht 
-     der Irregehenden!
+7. den Weg derjenigen, denen Du Gunst erwiesen hast, nicht derjenigen, die (Deinen) Zorn erregt haben, und nicht der Irregehenden!
   `;

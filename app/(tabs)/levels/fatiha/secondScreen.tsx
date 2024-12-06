@@ -1,19 +1,22 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import AudioPlayer from "@/components/AudioPlayer";
-import useUserInformationStore from "@/components/userInformationStore";
 import { fatihaTextAudio } from "@/components/suren";
 import { ScrollView, View } from "react-native";
 import TitleSura from "@/components/TitleSura";
 import Spacer from "@/components/Spacer";
 import InformationContainer from "@/components/InformationContainer";
 import ContinueButton from "@/components/ContinueButton";
+import useGetUserInformation from "@/components/useGetUserInformation";
+import { coustomTheme } from "@/components/coustomTheme";
+
 
 export default function Fatiha() {
-  const { gender } = useUserInformationStore();
-
+  // const { gender } = useUserInformationStore();
+  const { name, gender, userLoading } = useGetUserInformation();
+  const themestyles = coustomTheme()
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={[styles.container, themestyles.background]}>
       <Spacer />
       <TitleSura text="Lass uns nun die Sura anhören!" />
       <AudioPlayer

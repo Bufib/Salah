@@ -7,20 +7,21 @@ import { Audio } from "expo-av";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useColorScheme } from "react-native";
+import { usePathname } from "expo-router";
+import { coustomTheme } from "./coustomTheme";
+import Spacer from "./Spacer";
 
 type audioPlayerTypes = {
   audioSource: any;
   textData: { time: number; text: string }[];
-}
+};
 
-const AudioPlayer = ({audioSource, textData}: audioPlayerTypes) => {
+const AudioPlayer = ({ audioSource, textData }: audioPlayerTypes) => {
   const [sound, setSound] = useState<Audio.Sound | null>(null);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [isFinished, setIsFinished] = useState<boolean>(false);
-
+  const themestyles = coustomTheme();
   const colorScheme = useColorScheme();
-
-  
 
   useEffect(() => {
     return () => {
@@ -29,6 +30,27 @@ const AudioPlayer = ({audioSource, textData}: audioPlayerTypes) => {
       }
     };
   }, [sound]);
+
+  const pathname = usePathname();
+
+  // Stops and unload function if user navigates to different file
+  useEffect(() => {
+    // Function to unload the audio and reset it
+    const stopAndUnloadAudio = async () => {
+      if (sound) {
+        await sound.pauseAsync(); // Pause the audio if playing
+        await sound.unloadAsync(); // Unload audio to free resources
+        setSound(null); // Clean up the sound object
+        setCurrentTime(0); // Reset the current time to 0
+        setIsFinished(false); // Reset the finished state
+      }
+    };
+
+    // Trigger the cleanup when the component is unmounted or the route changes
+    return () => {
+      stopAndUnloadAudio();
+    };
+  }, [pathname, sound]);
 
   const loadAndPlayAudio = async () => {
     try {
@@ -53,7 +75,7 @@ const AudioPlayer = ({audioSource, textData}: audioPlayerTypes) => {
           }
         }
       }
-  
+
       // If no sound is loaded, load a new audio file
       const { sound: audioSound } = await Audio.Sound.createAsync(
         audioSource,
@@ -62,19 +84,19 @@ const AudioPlayer = ({audioSource, textData}: audioPlayerTypes) => {
       );
       setSound(audioSound);
       setIsFinished(false);
-  
+
       // Set the audio position to currentTime if it's greater than 0
       if (currentTime > 0) {
         await audioSound.setPositionAsync(currentTime * 1000); // Convert seconds to milliseconds
       }
-  
+
       // Play the audio from the current position
       await audioSound.playAsync();
     } catch (error) {
       console.error("Error loading audio file:", error);
     }
   };
-  
+
   const goBack3Seconds = async () => {
     if (sound) {
       const status = await sound.getStatusAsync();
@@ -151,7 +173,6 @@ const AudioPlayer = ({audioSource, textData}: audioPlayerTypes) => {
       }
     }
   };
-  
 
   const renderText = () => {
     let activeIndex = -1;
@@ -180,53 +201,65 @@ const AudioPlayer = ({audioSource, textData}: audioPlayerTypes) => {
 
   return (
     <ScrollView style={styles.container}>
-      <ThemedView style={styles.suraContainer}>{renderText()}</ThemedView>
-      <View style={styles.audioControlContainer}>
-        <Pressable onPress={resetAudio} style={styles.resetButton}>
-          {colorScheme === "light" ? (
-            <Ionicons name='repeat-sharp' size={27} color='black' />
-          ) : (
-            <Ionicons name='repeat-sharp' size={27} color='white' />
-          )}
-        </Pressable>
-        <Pressable onPress={goBack3Seconds} style={styles.backButton}>
-          {colorScheme === "light" ? (
-            <Ionicons name='play-back-circle-outline' size={30} color='black' />
-          ) : (
-            <Ionicons name='play-back-circle-outline' size={30} color='white' />
-          )}
-        </Pressable>
-        <Pressable onPress={loadAndPlayAudio} style={styles.playButton}>
-          {colorScheme === "light" ? (
-            <AntDesign name='playcircleo' size={24} color='black' />
-          ) : (
-            <AntDesign name='playcircleo' size={24} color='white' />
-          )}
-        </Pressable>
-        <Pressable onPress={stopAudio} style={styles.stopButton}>
-          {colorScheme === "light" ? (
-            <Ionicons name='stop-circle-outline' size={30} color='black' />
-          ) : (
-            <Ionicons name='stop-circle-outline' size={30} color='white' />
-          )}
-        </Pressable>
+      <ThemedView style={[styles.suraContainer, themestyles.contrast]}>
+        {renderText()}
+        <Spacer />
+        <View style={styles.audioControlContainer}>
+          <Pressable onPress={resetAudio} style={styles.resetButton}>
+            {colorScheme === "light" ? (
+              <Ionicons name="repeat-sharp" size={27} color="black" />
+            ) : (
+              <Ionicons name="repeat-sharp" size={27} color="white" />
+            )}
+          </Pressable>
+          <Pressable onPress={goBack3Seconds} style={styles.backButton}>
+            {colorScheme === "light" ? (
+              <Ionicons
+                name="play-back-circle-outline"
+                size={30}
+                color="black"
+              />
+            ) : (
+              <Ionicons
+                name="play-back-circle-outline"
+                size={30}
+                color="white"
+              />
+            )}
+          </Pressable>
+          <Pressable onPress={loadAndPlayAudio} style={styles.playButton}>
+            {colorScheme === "light" ? (
+              <AntDesign name="playcircleo" size={24} color="black" />
+            ) : (
+              <AntDesign name="playcircleo" size={24} color="white" />
+            )}
+          </Pressable>
+          <Pressable onPress={stopAudio} style={styles.stopButton}>
+            {colorScheme === "light" ? (
+              <Ionicons name="stop-circle-outline" size={30} color="black" />
+            ) : (
+              <Ionicons name="stop-circle-outline" size={30} color="white" />
+            )}
+          </Pressable>
 
-        <Pressable onPress={goForward3Seconds} style={styles.forwardButton}>
-          {colorScheme === "light" ? (
-            <Ionicons
-              name='play-forward-circle-outline'
-              size={30}
-              color='black'
-            />
-          ) : (
-            <Ionicons
-              name='play-forward-circle-outline'
-              size={30}
-              color='white'
-            />
-          )}
-        </Pressable>
-      </View>
+          <Pressable onPress={goForward3Seconds} style={styles.forwardButton}>
+            {colorScheme === "light" ? (
+              <Ionicons
+                name="play-forward-circle-outline"
+                size={30}
+                color="black"
+              />
+            ) : (
+              <Ionicons
+                name="play-forward-circle-outline"
+                size={30}
+                color="white"
+              />
+            )}
+          </Pressable>
+        </View>
+        <Spacer />
+      </ThemedView>
     </ScrollView>
   );
 };
@@ -244,7 +277,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderWidth: 1,
     borderRadius: 10,
-    borderColor: "#ddd",
   },
   suraText: {
     paddingHorizontal: 10,
@@ -262,16 +294,27 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginTop: 10,
-    marginHorizontal: 100,
+    marginHorizontal: "auto",
+    padding: 10,
+    borderWidth: 2,
+    borderRadius: 15,
   },
   resetButton: {
-    // Makes everything more even
-    marginLeft: -10,
+    paddingLeft: 10,
+    paddingRight: 10,
   },
-  playButton: {},
-  stopButton: {},
-  backButton: {},
-  forwardButton: {},
+  playButton: {
+    paddingRight: 10,
+  },
+  stopButton: {
+    paddingRight: 10,
+  },
+  backButton: {
+    paddingRight: 10,
+  },
+  forwardButton: {
+    paddingRight: 10,
+  },
   buttonText: {
     color: "#fff",
     fontSize: 18,
