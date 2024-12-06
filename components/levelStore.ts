@@ -300,7 +300,7 @@ const useLevelStore = create<LevelState>((set) => ({
 
 
   // !Workaround 
-  inaccessibleLevels: levelButtons.filter((level => level !== 'start' && level !== 'fatiha')), 
+  inaccessibleLevels: levelButtons.filter((level => level !== 'start' && level !== 'fatiha' && level !== 'start')), 
 
 
   loadLevels: async () => {
@@ -313,7 +313,7 @@ const useLevelStore = create<LevelState>((set) => ({
 
 
   // !Workaround 
-       acc[level] = levels[level] ?? (level === 'start' || level == 'fatiha');
+       acc[level] = levels[level] ?? (level === 'start' || level == 'fatiha' ||level !== 'start');
 
 
         return acc;

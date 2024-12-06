@@ -33,7 +33,7 @@ export default function RootLayout() {
         <Stack.Screen
           name="wudu"
           options={{
-            headerShown: true,
+            headerShown: false,
             title: "Wudu",
           }}
         />
