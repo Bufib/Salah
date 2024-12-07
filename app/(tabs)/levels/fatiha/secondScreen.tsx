@@ -11,7 +11,7 @@ import useGetUserInformation from "@/components/useGetUserInformation";
 import { coustomTheme } from "@/components/coustomTheme";
 
 
-export default function Fatiha() {
+export default function FatihaSecondScreen() {
   // const { gender } = useUserInformationStore();
   const { name, gender, userLoading } = useGetUserInformation();
   const themestyles = coustomTheme()
@@ -35,7 +35,9 @@ export default function Fatiha() {
         text="Höre dir die Sura solange an, bis du sie auswendig kannst! 
         Im nächsten Schritt gibt es dann nämlich einen kleinen Test"
         imagePosition="right"
+        
       />
+            <Spacer />
       <ContinueButton
         link={"/(tabs)/levels/fatiha/thirdScreen"}
         activateNextLevelButton={false}

@@ -11,7 +11,7 @@ export const fatihaTextAudio = [
   },
 ];
 
-export const fatihaTextDragAndDrop = [
+export const fatihaTextSortableList = [
   "Bismi Allahi arrahmani arraheem",
   "Alhamdu lillahi rabbi alAAalameen",
   "Arrahmani arraheem",

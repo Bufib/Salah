@@ -35,9 +35,12 @@ const Wudu = () => {
   return (
     <ScrollView style={[styles.container, themeStyles.background]}>
       <Spacer />
-      <View style={[styles.contentContainer, themeStyles.contrast]}>
+      <View style={styles.contentContainer}>
         {wuduData.map((stage, index) => (
-          <View key={index} style={styles.wuduStageContainer}>
+          <View
+            key={index}
+            style={[styles.wuduStageContainer, themeStyles.contrast]}
+          >
             <Image
               source={stage.image}
               contentFit="contain"
@@ -49,7 +52,11 @@ const Wudu = () => {
         ))}
       </View>
       <Spacer />
-      <ContinueButton activateNextLevelButton={false} text="Weiter" link={"/(tabs)/levels/wudu/secondScreen"}/>
+      <ContinueButton
+        activateNextLevelButton={false}
+        text="Weiter"
+        link={"/(tabs)/levels/wudu/secondScreen"}
+      />
     </ScrollView>
   );
 };
@@ -63,19 +70,19 @@ const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     flexDirection: "column",
+    gap: 20,
   },
   wuduStageContainer: {
     flex: 1,
     flexDirection: "row",
-    marginBottom: 15,
     gap: 10,
-    padding: 7
+    padding: 7,
   },
   wuduImage: {
     width: 250,
     height: "auto",
     aspectRatio: 1,
-    borderWidth: 2
+    borderWidth: 2,
   },
 
   wuduText: {

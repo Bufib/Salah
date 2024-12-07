@@ -10,7 +10,7 @@ import useGetUserInformation from "@/components/useGetUserInformation";
 import ImageWithSpeechBubble from "@/components/ImageWithSpeechBubble";
 import { coustomTheme } from "@/components/coustomTheme";
 
-export default function Fatiha() {
+export default function ThirdSecondScreen() {
   // const { gender } = useUserInformationStore();
   const { name, gender, userLoading } = useGetUserInformation();
   const themeStyles = coustomTheme()

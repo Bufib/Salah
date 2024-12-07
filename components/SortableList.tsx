@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Pressable, Text } from "react-native";
-import DraggableFlatList, {
-  RenderItemParams,
-} from "react-native-draggable-flatlist";
 import { ThemedText } from "./ThemedText";
-import { ThemedView } from "./ThemedView";
 import shuffledTextArray from "./shuffleTextArray";
 import { Colors } from "@/constants/Colors";
 import ContinueButton from "./ContinueButton";
@@ -13,6 +9,7 @@ import Spacer from "./Spacer";
 import ConfettiCannon from "react-native-confetti-cannon";
 import useGetUserInformation from "@/components/useGetUserInformation";
 import ImageWithSpeechBubble from "./ImageWithSpeechBubble";
+import DragList, { DragListRenderItemInfo } from "react-native-draglist";
 
 interface SortableListProps {
   data: string[];
@@ -45,7 +42,9 @@ const SortableList = ({
 
   const { name, gender, userLoading } = useGetUserInformation();
 
-  const renderItem = ({ item, drag, isActive }: RenderItemParams<string>) => {
+  const renderItem = (info: DragListRenderItemInfo<string>) => {
+    const { item, onDragStart, onDragEnd, isActive } = info;
+
     return (
       <View style={styles.listItemsContainer}>
         <Pressable
@@ -61,9 +60,9 @@ const SortableList = ({
                 : Colors.universal.sortableListIsNotActiv,
             },
           ]}
-          onLongPress={!rightResult ? drag : undefined}
+          onPressIn={!rightResult ? onDragStart : undefined}
+          onPressOut={!rightResult ? onDragEnd : undefined}
         >
-          {/* Drag items as long as right result not achieved */}
           <Text style={styles.itemText} selectable={false}>
             {item}
           </Text>
@@ -75,20 +74,27 @@ const SortableList = ({
   return (
     <View style={styles.container}>
       {rightResult && (
-        <ConfettiCannon
-          count={100}
-          origin={{ x: -99, y: 0 }}
-          fadeOut={true}
-          explosionSpeed={300}
-        />
+        <View style={styles.confettiContainer}>
+          <ConfettiCannon
+            count={100}
+            origin={{ x: -10, y: 0 }}
+            fadeOut={true}
+            explosionSpeed={300}
+          />
+        </View>
       )}
-      <DraggableFlatList
+      <DragList
         data={items}
         renderItem={renderItem}
-        keyExtractor={(item, index) => `item-${index}`}
-        onDragEnd={({ data }) => setItems(data)}
-        containerStyle={{ flex: 1 }}
+        keyExtractor={(item, index) => `${item}-${index}`}
+        onReordered={(fromIndex, toIndex) => {
+          const updatedItems = [...items];
+          const [movedItem] = updatedItems.splice(fromIndex, 1);
+          updatedItems.splice(toIndex, 0, movedItem);
+          setItems(updatedItems);
+        }}
       />
+
       <Spacer />
       {rightResult &&
       rightResultLink &&
@@ -130,6 +136,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  confettiContainer: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
   listItemsContainer: {
     flex: 1,
     flexDirection: "row",

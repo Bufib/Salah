@@ -1,49 +1,57 @@
 import React from "react";
-import { StyleSheet } from "react-native";
-import AudioPlayer from "@/components/AudioPlayer";
-import { fatihaTextAudio } from "@/components/suren";
-import { ScrollView, View } from "react-native";
-import TitleSura from "@/components/TitleSura";
-import Spacer from "@/components/Spacer";
-import InformationContainer from "@/components/InformationContainer";
-import ContinueButton from "@/components/ContinueButton";
-import useGetUserInformation from "@/components/useGetUserInformation";
 import { coustomTheme } from "@/components/coustomTheme";
+import Spacer from "@/components/Spacer";
+import SortableGrid, { SortableImageData } from "@/components/SortableGrid";
+import { ThemedView } from "@/components/ThemedView";
+import { StyleSheet } from "react-native";
+import InformationContainer from "@/components/InformationContainer";
+// Correct order of image IDs
+const CORRECT_ORDER = ["1", "2", "3", "4", "5"];
 
+const wuduData: SortableImageData[] = [
+  {
+    id: "1",
+    image: require("@/assets/images/boy.png"),
+  },
+  {
+    id: "2",
+    image: require("@/assets/images/wuduBoyWashingFace.webp"),
+  },
+  {
+    id: "3",
+    image: require("@/assets/images/wuduWipingArm.webp"),
+  },
+  {
+    id: "4",
+    image: require("@/assets/images/wuduBoyWipingHair.webp"),
+  },
+  {
+    id: "5",
+    image: require("@/assets/images/wuduWipingFoot.webp"),
+  },
+];
 
-export default function Fatiha() {
-  // const { gender } = useUserInformationStore();
-  const { name, gender, userLoading } = useGetUserInformation();
-  const themestyles = coustomTheme()
+const SecondScreen = () => {
+  const themeStyles = coustomTheme();
+
   return (
-    <ScrollView style={[styles.container, themestyles.background]}>
+    <ThemedView style={styles.container}>
       <Spacer />
-      <TitleSura text="Lass uns nun die Sura anhören!" />
-      <AudioPlayer
-        audioSource={
-          gender === "boy"
-            ? require("@/assets/audio/suraFatihaMale.mp3")
-            : require("@/assets/audio/suraFatihaFemale.mp3")
-        }
-        textData={fatihaTextAudio}
+      <Spacer />
+      <InformationContainer text="Ordne die Schritte der richtigen Reinfolge nach" bold={true}/>
+      <Spacer />
+      <SortableGrid
+        correctOrder={CORRECT_ORDER}
+        imageData={wuduData}
+        rightResultLink={"/(tabs)/levels"}
+        rightResultActivateNextLevelButton={true}
+        rightResultLinkText="Fertig"
       />
-      <Spacer />
-      <Spacer />
-      <InformationContainer
-        bold={true}
-        gender={gender}
-        text="Höre dir die Sura solange an, bis du sie auswendig kannst! 
-        Im nächsten Schritt gibt es dann nämlich einen kleinen Test"
-        imagePosition="right"
-      />
-      <ContinueButton
-        link={"/(tabs)/levels/fatiha/thirdScreen"}
-        activateNextLevelButton={false}
-      />
-      <Spacer />
-    </ScrollView>
+    </ThemedView>
   );
-}
+};
+
+export default SecondScreen;
 
 const styles = StyleSheet.create({
   container: {

@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     position: "absolute",
     transform: [{ rotate: "-10deg" }],
+    zIndex: 10
   },
   characterImage: {
     height: 200,

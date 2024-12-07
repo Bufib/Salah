@@ -10,7 +10,7 @@ import { ThemedView } from "@/components/ThemedView";
 import { coustomTheme } from "@/components/coustomTheme";
 
 export default function Fatiha() {
-  const themeStyles = coustomTheme()
+  const themeStyles = coustomTheme();
   return (
     <ScrollView style={[styles.container, themeStyles.background]}>
       <ThemedView style={styles.contentContainer}>
@@ -19,6 +19,7 @@ export default function Fatiha() {
           titleText="Schauen wir uns als erstes die Sura auf Deutsch an:"
           suraText={fatihaTextGerman}
         />
+        <Spacer />
         <ContinueButton
           link={"/(tabs)/levels/fatiha/secondScreen"}
           activateNextLevelButton={false}
@@ -32,7 +33,7 @@ export default function Fatiha() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "transparent"
+    backgroundColor: "transparent",
   },
   contentContainer: {
     flex: 1,

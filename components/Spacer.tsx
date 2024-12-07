@@ -9,8 +9,8 @@ export default Spacer;
 
 const styles = StyleSheet.create({
   spacer: {
-    marginTop: 7.5,
-    marginBottom: 7.5,
+    marginTop: 5,
+    marginBottom: 5,
     backgroundColor: "transparent"
   },
 });

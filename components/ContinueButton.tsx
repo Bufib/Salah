@@ -46,9 +46,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignSelf: "flex-end",
     marginRight: 15,
-    marginTop: 5,
-    marginBottom: 5,
     backgroundColor: Colors.universal.continueButtonColor,
+    zIndex: 3 // ConfettiCannon is zIndex: 3
   },
   pressableText: {
     fontSize: 20,
