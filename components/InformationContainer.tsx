@@ -11,6 +11,7 @@ type InformationContainerProps = {
   bold?: boolean;
   center?: boolean;
   bigText?: boolean;
+  author?: string;
 };
 
 const InformationContainer = ({
@@ -20,6 +21,7 @@ const InformationContainer = ({
   center,
   bigText,
   imagePosition = "left",
+  author,
 }: InformationContainerProps) => {
   const themeStyles = coustomTheme();
   return (
@@ -62,7 +64,6 @@ const InformationContainer = ({
 
 const styles = StyleSheet.create({
   container: {
-    //flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -98,6 +99,7 @@ const styles = StyleSheet.create({
     aspectRatio: 0.6,
     alignSelf: "flex-end",
   },
+  authorText: {},
 });
 
 export default InformationContainer;

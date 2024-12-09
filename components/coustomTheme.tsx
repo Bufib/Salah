@@ -24,6 +24,12 @@ export const lightTheme = {
   titleSuraBackroundColor: {
     backgroundColor: Colors.light.titleSuraBackroundColor,
   },
+  markdownText: {
+    color: Colors.light.text,
+  },
+  audioButton: {
+    backgroundColor: Colors.light.audioButton,
+  },
 };
 
 export const darkTheme = {
@@ -48,6 +54,12 @@ export const darkTheme = {
 
   titleSuraBackroundColor: {
     backgroundColor: Colors.dark.titleSuraBackroundColor,
+  },
+  markdownText: {
+    color: Colors.dark.text,
+  },
+  audioButton: {
+    backgroundColor: Colors.dark.audioButton,
   },
 };
 

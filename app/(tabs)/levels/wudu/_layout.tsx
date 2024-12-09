@@ -24,7 +24,7 @@ export default function RootLayout() {
             options={{
               headerShown: true,
               headerTitle: "Wudu",
-              headerLeft: () => <HeaderLeftBackButton />,
+              headerLeft: () => <HeaderLeftBackButton backText="Übersicht" />,
             }}
           />
           <Stack.Screen

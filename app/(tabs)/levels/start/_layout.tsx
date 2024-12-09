@@ -23,7 +23,7 @@ export default function RootLayout() {
             name="index"
             options={{
               headerShown: true,
-              headerTitle: "Fatiha",
+              headerTitle: "Start",
               headerLeft: () => <HeaderLeftBackButton backText="Übersicht" />,
             }}
           />
@@ -31,14 +31,7 @@ export default function RootLayout() {
             name="secondScreen"
             options={{
               headerShown: true,
-              headerTitle: "Fatiha",
-            }}
-          />
-          <Stack.Screen
-            name="thirdScreen"
-            options={{
-              headerShown: true,
-              headerTitle: "Fatiha",
+              headerTitle: "Start",
             }}
           />
         </Stack>

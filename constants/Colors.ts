@@ -20,6 +20,7 @@ export const Colors = {
     indexLevelBackgroundColor: "rgba(0, 144, 0, 1)",
     indexLevelTextColor: "#fff",
     titleSuraBackroundColor: "#02B943",
+     audioButton: "#99AAAB"
   },
   dark: {
     text: "#ECEDEE",
@@ -33,6 +34,7 @@ export const Colors = {
     indexLevelBackgroundColor: "rgba(0, 144, 0, 1)",
     indexLevelTextColor: "#000",
     titleSuraBackroundColor: "#019031",
+    audioButton: "#586776"
   },
   universal: {
     indexUnaccessibleLevelBackground: "#d3d3d3",
@@ -52,6 +54,7 @@ export const Colors = {
     tabbarBackgroundDark: "#121212",
     tabbarBackgroundTopLight: "#ccc",
     tabbarBackgroundTopDark: "#333",
+    link: "rgb(10, 132, 255)",
 
   },
 };

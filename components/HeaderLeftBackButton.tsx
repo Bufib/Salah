@@ -5,7 +5,7 @@ import { StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Entypo from "@expo/vector-icons/Entypo";
 
-const HeaderLeftBackButton = () => {
+const HeaderLeftBackButton = ({backText= "Zurück"}) => {
   return (
     <Pressable style={styles.container} onPress={() => router.back()}>
       {Platform.OS === "ios" ? (
@@ -17,7 +17,7 @@ const HeaderLeftBackButton = () => {
       ) : (
         <Entypo name="chevron-thin-left" size={24} color={styles.icon.color} />
       )}
-      <ThemedText style={styles.backButtonText}>Übersicht</ThemedText>
+      <ThemedText style={styles.backButtonText}>{backText}</ThemedText>
     </Pressable>
   );
 };

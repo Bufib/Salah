@@ -1,18 +1,18 @@
 export const levelButtons = [
   "start",
   "wudu",
-  "eröffnungspreisung [takbirat-ul-ihram]",
-  "stehen (qiama)",
+  "eroeffnungspreisung",
+  "stehen",
   "fatiha",
   "die zweite Sura",
   "iklas",
   "asr",
   "al-Kauther",
   "qadr",
-  "verneigung (ruku)",
-  "niederwerfung (sadschda)",
-  "bekenntnisverlesung (taschahhud)",
-  "abschlussgruß (Salam)",
+  "verneigung",
+  "niederwerfung",
+  "bekenntnisverlesung",
+  "abschlussgruß",
 ];
 
 export const smallerLevelButtons = ["iklas", "asr", "al-kauther", "qadr"];

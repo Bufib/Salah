@@ -12,7 +12,6 @@
 // import { router } from "expo-router";
 // import useGetUserInformation from "@/components/useGetUserInformation";
 
-
 // export default function RootLayout() {
 //   const colorScheme = useColorScheme();
 //   const [loaded] = useFonts({
@@ -76,6 +75,7 @@ import "react-native-reanimated";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { router } from "expo-router";
 import useGetUserInformation from "@/components/useGetUserInformation";
+import HeaderLeftBackButton from "@/components/HeaderLeftBackButton";
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -128,6 +128,22 @@ export default function RootLayout() {
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
         <Stack.Screen name="initialScreen" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="impressum"
+          options={{
+            headerShown: true,
+            headerTitle: "Impressum",
+            headerLeft: () => <HeaderLeftBackButton />,
+          }}
+        />
+        <Stack.Screen
+          name="about"
+          options={{
+            headerShown: true,
+            headerTitle: "Über diese App",
+            headerLeft: () => <HeaderLeftBackButton />,
+          }}
+        />
       </Stack>
     </ThemeProvider>
   );

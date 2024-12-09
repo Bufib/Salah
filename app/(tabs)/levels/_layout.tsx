@@ -26,7 +26,7 @@ export default function RootLayout() {
         <Stack.Screen
           name="start"
           options={{
-            headerShown: true,
+            headerShown: false,
             title: "Start",
           }}
         />
@@ -42,6 +42,13 @@ export default function RootLayout() {
           options={{
             headerShown: false,
             headerTitle: "Fatiha",
+          }}
+        />
+        <Stack.Screen
+          name="eroeffnungspreisung"
+          options={{
+            headerShown: false,
+            headerTitle: "Eröffnungspreisung",
           }}
         />
       </Stack>
