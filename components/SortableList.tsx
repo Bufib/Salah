@@ -83,6 +83,7 @@ const SortableList = ({
           />
         </View>
       )}
+      <View style={{ flex: 1 }}>
       <DragList
         data={items}
         renderItem={renderItem}
@@ -94,6 +95,7 @@ const SortableList = ({
           setItems(updatedItems);
         }}
       />
+      </View>
 
       <Spacer />
       {rightResult &&
@@ -186,5 +188,6 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     textAlign: "center",
     color: Colors.universal.checkResultSortableListButtonTextColor,
+  
   },
 });

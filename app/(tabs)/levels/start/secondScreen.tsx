@@ -7,13 +7,14 @@ import ContinueButton from "@/components/ContinueButton";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Colors } from "@/constants/Colors";
 import Spacer from "@/components/Spacer";
+import { UIManager, Platform } from "react-native";
 
 export default function start() {
   return (
     <ScrollView style={styles.container}>
       <SafeAreaView edges={["bottom"]}>
         <ThemedView style={styles.textContainer}>
-        <ThemedText style={styles.informationText}>
+          <ThemedText style={styles.informationText}>
             Im Gebet selbst gibt es folgende Stadien
           </ThemedText>
           <ThemedText style={[styles.informationText, styles.boldText]}>

@@ -46,6 +46,7 @@ export default function Fatiha() {
           text="Fertig"
         />
         <Spacer />
+        <Spacer />
       </ThemedView>
     </ScrollView>
   );

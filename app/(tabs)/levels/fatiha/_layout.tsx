@@ -24,7 +24,7 @@ export default function RootLayout() {
             options={{
               headerShown: true,
               headerTitle: "Fatiha",
-              headerLeft: () => <HeaderLeftBackButton backText="Übersicht" />,
+              headerLeft: () => <HeaderLeftBackButton  />,
             }}
           />
           <Stack.Screen

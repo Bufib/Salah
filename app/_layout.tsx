@@ -76,6 +76,7 @@ import { useColorScheme } from "@/hooks/useColorScheme";
 import { router } from "expo-router";
 import useGetUserInformation from "@/components/useGetUserInformation";
 import HeaderLeftBackButton from "@/components/HeaderLeftBackButton";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();

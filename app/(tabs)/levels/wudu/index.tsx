@@ -6,6 +6,7 @@ import { ThemedText } from "@/components/ThemedText";
 import Spacer from "@/components/Spacer";
 import ContinueButton from "@/components/ContinueButton";
 import { Text } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const wuduData = [
   {
@@ -35,33 +36,39 @@ const Wudu = () => {
 
   return (
     <ScrollView style={[styles.container, themeStyles.background]}>
-      <Spacer />
-      <View style={styles.contentContainer}>
-        {wuduData.map((stage, index) => (
-          <View key={index} style={[styles.wuduStageContainer, themeStyles.contrast]}>
-            <ThemedText style={styles.stageText}>Schritt {index + 1}</ThemedText>
+      <SafeAreaView edges={["bottom"]}>
+        <View style={styles.contentContainer}>
+          {wuduData.map((stage, index) => (
             <View
               key={index}
-              style={[styles.wuduStageContent, themeStyles.contrast]}
+              style={[styles.wuduStageContainer, themeStyles.contrast]}
             >
-              <Image
-                source={stage.image}
-                contentFit="contain"
-                style={styles.wuduImage}
-              />
+              <ThemedText style={styles.stageText}>
+                Schritt {index + 1}
+              </ThemedText>
+              <View
+                key={index}
+                style={[styles.wuduStageContent, themeStyles.contrast]}
+              >
+                <Image
+                  source={stage.image}
+                  contentFit="contain"
+                  style={styles.wuduImage}
+                />
 
-              <ThemedText style={styles.wuduText}>{stage.text}</ThemedText>
+                <ThemedText style={styles.wuduText}>{stage.text}</ThemedText>
+              </View>
             </View>
-          </View>
-        ))}
-      </View>
-      <Spacer />
-      <ContinueButton
-        activateNextLevelButton={false}
-        text="Weiter"
-        link={"/(tabs)/levels/wudu/secondScreen"}
-      />
-      <Spacer />
+          ))}
+        </View>
+        <Spacer />
+        <ContinueButton
+          activateNextLevelButton={false}
+          text="Weiter"
+          link={"/(tabs)/levels/wudu/secondScreen"}
+        />
+        <Spacer />
+      </SafeAreaView>
     </ScrollView>
   );
 };
@@ -85,7 +92,7 @@ const styles = StyleSheet.create({
     fontSize: 19,
     fontWeight: "700",
     paddingTop: 5,
-    paddingLeft: 10
+    paddingLeft: 10,
   },
 
   wuduStageContent: {

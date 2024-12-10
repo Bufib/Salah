@@ -58,6 +58,7 @@ export default function start() {
           text="Weiter"
           activateNextLevelButton={false}
         />
+         <Spacer />
       </SafeAreaView>
     </ScrollView>
   );

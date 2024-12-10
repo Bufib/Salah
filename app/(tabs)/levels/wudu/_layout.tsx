@@ -7,6 +7,8 @@ import { Stack } from "expo-router";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import HeaderLeftBackButton from "@/components/HeaderLeftBackButton";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { UIManager, Platform } from "react-native";
+import { useEffect } from "react";
 
 export const unstable_settings = {
   initialRouteName: "index",
@@ -14,6 +16,15 @@ export const unstable_settings = {
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
+
+  useEffect(() => {
+    console.log("Platform:", Platform.OS);
+    console.log("UIManager exists:", !!UIManager);
+    console.log(
+      "setLayoutAnimationEnabledExperimental exists:",
+      !!UIManager?.setLayoutAnimationEnabledExperimental
+    );
+  }, []);
 
   return (
     <GestureHandlerRootView>
@@ -24,7 +35,7 @@ export default function RootLayout() {
             options={{
               headerShown: true,
               headerTitle: "Wudu",
-              headerLeft: () => <HeaderLeftBackButton backText="Übersicht" />,
+              headerLeft: () => <HeaderLeftBackButton  />,
             }}
           />
           <Stack.Screen

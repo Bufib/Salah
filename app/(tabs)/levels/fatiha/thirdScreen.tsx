@@ -29,6 +29,9 @@ export default function FatihaThirdScreen() {
         rightResultLinkText="Fertig"
         rightResultActivateNextLevelButton={true}
       />
+
+
+  
     </GestureHandlerRootView>
   );
 }

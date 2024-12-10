@@ -5,7 +5,7 @@ import { StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Entypo from "@expo/vector-icons/Entypo";
 
-const HeaderLeftBackButton = ({backText= "Zurück"}) => {
+const HeaderLeftBackButton = ({backText= ""}) => {
   return (
     <Pressable style={styles.container} onPress={() => router.back()}>
       {Platform.OS === "ios" ? (

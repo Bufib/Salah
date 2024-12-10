@@ -226,26 +226,28 @@ const styles = StyleSheet.create({
   startButtonText: {
     fontWeight: "700",
     textAlign: "center",
+ 
   },
   imageContainer: {
     position: "absolute",
     bottom: 0,
     right: 0,
-    zIndex: -1,
+   
   },
   imageBoy: {
     width: 450,
     aspectRatio: 1,
     position: "absolute",
-    bottom: -110,
+    bottom: -150,
     right: -135,
     transform: [{ rotate: "-10deg" }],
+   
   },
   imageGirl: {
     width: 450,
     aspectRatio: 1,
     position: "absolute",
-    bottom: -120,
+    bottom: -150,
     right: -150,
     transform: [{ rotate: "-10deg" }],
   },
